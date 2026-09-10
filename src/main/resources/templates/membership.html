@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Membership - FitCore</title>
+
+  <link rel="stylesheet" href="/css/membership.css">
+
+  <style>
+    .membership-section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .membership-section h1 {
+      margin-bottom: 50px;
+    }
+
+    .current-membership {
+      max-width: 700px;
+      margin: 0 auto 50px;
+      padding: 30px;
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 15px;
+      text-align: left;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .current-membership h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .current-membership p {
+      margin: 14px 0;
+    }
+
+    .current-membership strong {
+      display: inline-block;
+      width: 130px;
+    }
+
+    .membership-status {
+      font-weight: bold;
+    }
+
+    .plans-title {
+      margin-bottom: 30px;
+    }
+
+    .plans {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .plan {
+      width: 300px;
+      padding: 35px 30px;
+      border-radius: 15px;
+      background: #111;
+      border: 1px solid #333;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .plan:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .plan h2 {
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    .price {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 25px;
+    }
+
+    .plan ul {
+      text-align: left;
+      padding-left: 20px;
+      margin-bottom: 30px;
+      line-height: 1.8;
+      flex-grow: 1;
+    }
+
+    .plan li {
+      margin-bottom: 5px;
+    }
+
+    .join-btn {
+      display: inline-block;
+      text-decoration: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s ease;
+    }
+
+    .join-btn:hover {
+      transform: scale(1.03);
+    }
+
+    @media (max-width: 768px) {
+      .membership-section {
+        padding: 50px 15px;
+      }
+
+      .plans {
+        gap: 20px;
+      }
+
+      .plan {
+        width: 100%;
+        max-width: 350px;
+      }
+
+      .current-membership {
+        padding: 25px 20px;
+      }
+
+      .current-membership strong {
+        width: 110px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">
+    ☰
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+
+    <div th:if="${loggedInUser == null}">
+      <a href="/signup" class="signup-btn">Sign Up</a>
+      <a href="/login" class="login-btn">Log In</a>
+    </div>
+
+    <div th:if="${loggedInUser != null}" class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">User</span>
+      </span>
+
+      <a href="/logout" class="login-btn">Logout</a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="membership-section">
+
+  <h1>Choose Your Membership</h1>
+
+
+  <!-- Current Membership -->
+
+  <div
+          th:if="${loggedInUser != null and currentMembership != null}"
+          class="current-membership">
+
+    <h2>My Current Membership</h2>
+
+    <p>
+      <strong>Plan:</strong>
+      <span th:text="${currentPlan.name}">Pro</span>
+    </p>
+
+    <p>
+      <strong>Price:</strong>
+      Nrs<span th:text="${currentPlan.price}">3500</span>
+    </p>
+
+    <p>
+      <strong>Start Date:</strong>
+      <span th:text="${currentMembership.startDate}">
+        2026-09-10
+      </span>
+    </p>
+
+    <p>
+      <strong>End Date:</strong>
+      <span th:text="${currentMembership.endDate}">
+        2026-12-10
+      </span>
+    </p>
+
+    <p>
+      <strong>Status:</strong>
+      <span
+              class="membership-status"
+              th:text="${currentMembership.status}">
+        ACTIVE
+      </span>
+    </p>
+
+  </div>
+
+
+  <h2 class="plans-title">Available Membership Plans</h2>
+
+
+  <div class="plans">
+
+    <div class="plan" th:each="plan : ${plans}">
+
+      <h2 th:text="${plan.name}">
+        Basic
+      </h2>
+
+      <p class="price">
+        Nrs<span th:text="${plan.price}">
+          2500
+        </span> / month
+      </p>
+
+      <ul>
+
+        <li th:if="${plan.name == 'Basic'}">
+          Gym Access (6am-6pm)
+        </li>
+
+        <li th:if="${plan.name == 'Basic'}">
+          Standard Equipment
+        </li>
+
+        <li th:if="${plan.name == 'Basic'}">
+          1 Free Group Class
+        </li>
+
+
+        <li th:if="${plan.name == 'Pro'}">
+          24/7 Gym Access
+        </li>
+
+        <li th:if="${plan.name == 'Pro'}">
+          All Equipment Access
+        </li>
+
+        <li th:if="${plan.name == 'Pro'}">
+          3 Group Classes / Month
+        </li>
+
+        <li th:if="${plan.name == 'Pro'}">
+          Fitness Plan
+        </li>
+
+
+        <li th:if="${plan.name == 'Elite'}">
+          All Pro Features
+        </li>
+
+        <li th:if="${plan.name == 'Elite'}">
+          Personal Trainer
+        </li>
+
+        <li th:if="${plan.name == 'Elite'}">
+          Nutrition Guidance
+        </li>
+
+        <li th:if="${plan.name == 'Elite'}">
+          Priority Booking
+        </li>
+
+        <li th:if="${plan.name == 'Elite'}">
+          Sauna and Steam
+        </li>
+
+      </ul>
+
+
+      <a
+              th:href="@{/join(plan=${plan.name})}"
+              class="join-btn">
+
+        Join Now
+
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<footer class="footer">
+
+  <h3>
+    Ready to Transform Your <span>Body?</span>
+  </h3>
+
+  <p>
+    <a href="mailto:muscleup9@gmail.com">
+      muscleup9@gmail.com
+    </a>
+  </p>
+
+  <div class="socials">
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+  </div>
+
+  <div class="policy-links">
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Terms &amp; Conditions</a>
+  </div>
+
+</footer>
+
+
+<script>
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>

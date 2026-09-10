@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Laxman - Cardio & Endurance Specialist | FitCore</title>
+  <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">☰</button>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+
+    <div th:if="${loggedInUser == null}">
+      <a href="/signup" class="signup-btn">Sign Up</a>
+      <a href="/login" class="login-btn">Log In</a>
+    </div>
+
+    <div th:if="${loggedInUser != null}" class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">User</span>
+      </span>
+
+      <a href="/logout" class="login-btn">Logout</a>
+
+    </div>
+
+  </div>
+</header>
+
+<main class="trainer-profile">
+  <section class="trainer-card" style="max-width: 600px; margin: 2rem auto; padding: 1rem;">
+
+    <img src="assets/ppp.jpg"
+         alt="Trainer Laxman"
+         style="width: 100%; border-radius: 10px; object-fit: cover; height: 400px;" />
+
+    <h2>Laxman</h2>
+
+    <h3>Cardio & Endurance Specialist</h3>
+
+    <p>
+      Laxman specializes in cardio and endurance training with years of experience helping clients improve stamina and cardiovascular health.
+      His training methods focus on increasing energy, enhancing lung capacity, and building long-lasting fitness through personalized programs.
+    </p>
+
+    <p>
+      Whether you are training for a marathon or want to boost your daily energy levels, Laxman will guide you with expert coaching and motivation.
+      Join his classes to push your limits and achieve your endurance goals.
+    </p>
+
+  </section>
+</main>
+
+<footer class="footer">
+  <h3>Ready to Transform Your <span>Body?</span></h3>
+
+  <p>
+    <a href="mailto:fitcore@gmail.com">fitcore@gmail.com</a>
+  </p>
+
+  <div class="socials">
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+  </div>
+
+  <div class="policy-links">
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Terms & Conditions</a>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+</script>
+
+</body>
+</html>

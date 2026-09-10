@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Login - FitCore Gym</title>
+
+  <link rel="stylesheet" href="/css/location.css">
+
+  <style>
+    /* Login Page */
+
+    main {
+      min-height: 75vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 60px 20px;
+    }
+
+    .login-section {
+      width: 100%;
+      max-width: 430px;
+      padding: 40px;
+      border-radius: 16px;
+      text-align: center;
+
+      background: rgba(20, 20, 20, 0.95);
+      border: 1px solid #333;
+
+      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    .login-section h1 {
+      margin: 0 0 10px;
+      font-size: 32px;
+    }
+
+    .welcome-msg {
+      margin: 0 0 30px;
+      line-height: 1.6;
+      opacity: 0.75;
+    }
+
+    .login-form {
+      text-align: left;
+    }
+
+    .login-form label {
+      display: block;
+      margin: 18px 0 8px;
+      font-weight: 600;
+    }
+
+    .login-form input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 13px 15px;
+
+      border: 1px solid #444;
+      border-radius: 8px;
+
+      background: #1b1b1b;
+      color: inherit;
+
+      font-size: 15px;
+      outline: none;
+    }
+
+    .login-form input:focus {
+      border-color: #f6c66e;
+      box-shadow: 0 0 0 2px rgba(246, 198, 110, 0.12);
+    }
+
+    .form-btn {
+      width: 100%;
+      margin-top: 25px;
+      padding: 13px;
+
+      border: none;
+      border-radius: 8px;
+
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+
+      transition: 0.2s ease;
+    }
+
+    .form-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .signup-link {
+      margin-top: 25px;
+      opacity: 0.8;
+    }
+
+    .signup-link a {
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 25px 20px;
+    }
+
+    @media (max-width: 600px) {
+      main {
+        padding: 40px 15px;
+      }
+
+      .login-section {
+        padding: 30px 22px;
+      }
+
+      .login-section h1 {
+        font-size: 28px;
+      }
+    }
+  </style>
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore Gym</div>
+
+  <button
+          class="nav-toggle"
+          aria-label="toggle navigation">
+    &#9776;
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+
+      <li>
+        <a href="/">Home</a>
+      </li>
+
+      <li>
+        <a href="/about">About</a>
+      </li>
+
+      <li>
+        <a href="/location">Location</a>
+      </li>
+
+      <li>
+        <a href="/membership">Membership</a>
+      </li>
+
+      <li>
+        <a href="/contact">Contact</a>
+      </li>
+
+      <li>
+        <a href="/blog">Blog</a>
+      </li>
+
+      <li>
+        <a href="/gallery">Gallery</a>
+      </li>
+
+    </ul>
+  </nav>
+
+
+  <div class="auth-buttons">
+
+    <a href="/signup" class="signup-btn">
+      Sign Up
+    </a>
+
+    <a href="/login" class="login-btn">
+      Log In
+    </a>
+
+  </div>
+
+</header>
+
+
+<main>
+
+  <section class="login-section">
+
+    <h1>Welcome Back!</h1>
+
+    <p class="welcome-msg">
+      Great to see you again — ready to crush your fitness goals?
+    </p>
+
+
+    <form
+            class="login-form"
+            action="/login"
+            method="post">
+
+      <label for="email">
+        Email Address
+      </label>
+
+      <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="Enter your email"
+              autocomplete="email"
+              required
+      />
+
+
+      <label for="password">
+        Password
+      </label>
+
+      <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+      />
+
+
+      <button
+              type="submit"
+              class="signup-btn form-btn">
+        Log In
+      </button>
+
+    </form>
+
+
+    <p class="signup-link">
+      Don't have an account?
+      <a href="/signup">
+        Sign up here
+      </a>
+    </p>
+
+  </section>
+
+</main>
+
+
+<footer class="footer">
+
+  &copy; 2025 FitCore Gym. All rights reserved.
+
+</footer>
+
+
+<script>
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+
+</html>
+```

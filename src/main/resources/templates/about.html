@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>About Us - FitCore</title>
+
+  <link rel="stylesheet" href="/css/about.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">
+    ☰
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+
+      <li>
+        <a href="/">Home</a>
+      </li>
+
+      <li>
+        <a href="/about">About</a>
+      </li>
+
+      <li>
+        <a href="/location">Location</a>
+      </li>
+
+      <li>
+        <a href="/membership">Membership</a>
+      </li>
+
+      <li>
+        <a href="/contact">Contact</a>
+      </li>
+
+      <li>
+        <a href="/blog">Blog</a>
+      </li>
+
+      <li>
+        <a href="/gallery">Gallery</a>
+      </li>
+
+    </ul>
+  </nav>
+
+
+  <div class="auth-buttons">
+
+    <!-- Logged out -->
+    <div th:if="${loggedInUser == null}">
+
+      <a href="/signup" class="signup-btn">
+        Sign Up
+      </a>
+
+      <a href="/login" class="login-btn">
+        Log In
+      </a>
+
+    </div>
+
+
+    <!-- Logged in -->
+    <div
+            th:if="${loggedInUser != null}"
+            class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">
+          User
+        </span>
+      </span>
+
+      <a href="/logout" class="login-btn">
+        Logout
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="about-hero">
+
+  <h1>
+    About <span>FitCore</span>
+  </h1>
+
+  <p>
+    Transforming lives through fitness and community.
+  </p>
+
+</section>
+
+
+<section class="about-content">
+
+  <div class="content-text">
+
+    <h2>Our Story</h2>
+
+    <p>
+      Founded with a passion for fitness and well-being, FitCore is dedicated
+      to helping individuals of all levels achieve their health goals.
+      We believe that fitness is not just about physical strength, but mental
+      resilience and a supportive community.
+    </p>
+
+
+    <h2>Our Values</h2>
+
+    <ul>
+
+      <li>
+        <strong>Commitment:</strong>
+        We are dedicated to your personal transformation journey.
+      </li>
+
+      <li>
+        <strong>Community:</strong>
+        Building a welcoming environment for everyone.
+      </li>
+
+      <li>
+        <strong>Expertise:</strong>
+        Certified trainers to guide you safely and effectively.
+      </li>
+
+      <li>
+        <strong>Innovation:</strong>
+        Using the latest methods and equipment for best results.
+      </li>
+
+    </ul>
+
+
+    <h2>Meet Our Team</h2>
+
+    <p>
+      Our team consists of passionate professionals who are here to guide,
+      motivate, and support you every step of the way.
+    </p>
+
+  </div>
+
+
+  <div class="content-image">
+
+    <img
+            src="assets/team.jpg"
+            alt="Fitness Team"
+    />
+
+  </div>
+
+</section>
+
+
+<footer class="footer">
+
+  <h3>
+    Ready to Transform Your <span>Body?</span>
+  </h3>
+
+  <p>
+    <a href="mailto:fitcore@gmail.com">
+      fitcore@gmail.com
+    </a>
+  </p>
+
+
+  <div class="socials">
+
+    <a href="#">
+      Facebook
+    </a>
+
+    <a href="#">
+      Instagram
+    </a>
+
+  </div>
+
+
+  <div class="policy-links">
+
+    <a href="#">
+      Privacy Policy
+    </a>
+
+    |
+
+    <a href="#">
+      Terms & Conditions
+    </a>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+  // Mobile navigation toggle
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>
+```

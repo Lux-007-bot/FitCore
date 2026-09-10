@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard - FitCore</title>
+  <link rel="stylesheet" href="/css/adminDashboard.css">
+</head>
+<body>
+<!-- Navbar -->
+<header class="navbar">
+  <div class="logo">FitCore Admin</div>
+  <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
+  <nav>
+    <ul class="nav-links">
+      <li><a href="adminDashboard.html" class="active">Dashboard</a></li>
+      <li><a href="viewUsers.html">Users</a></li>
+      <li><a href="viewMessages.html">Messages</a></li>
+      <li><a href="settings.html">Settings</a></li>
+    </ul>
+  </nav>
+  <div class="auth-buttons">
+    <span>Welcome, Admin!</span>
+    <a href="../adminLogout.html" class="logout-btn">Log Out</a>
+  </div>
+</header>
+
+<!-- Dashboard Content -->
+<main class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <p>Manage users, messages, and settings from here.</p>
+  </div>
+
+  <div class="dashboard-cards">
+    <div class="dashboard-card">
+      <h3>Manage Users</h3>
+      <p>View, edit, or delete users registered on FitCore.</p>
+      <a href="viewUsers.html" class="start-btn">Go</a>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Messages</h3>
+      <p>Check all messages sent through the contact page.</p>
+      <a href="viewMessages.html" class="start-btn">Go</a>
+    </div>
+
+    <div class="dashboard-card">
+      <h3>Settings</h3>
+      <p>Update site settings, admin password, and more.</p>
+      <a href="settings.html" class="start-btn">Go</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <h3>FitCore Admin Panel</h3>
+  <p>&copy; 2025 FitCore</p>
+</footer>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+</script>
+</body>
+</html>

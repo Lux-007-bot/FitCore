@@ -1,0 +1,186 @@
+/* Base & reset */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #111; /* same as homepage background */
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+a {
+  color: #f6c66e;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #222;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f6c66e;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  font-weight: bold;
+  padding: 0.3rem 0.5rem;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+  background-color: #f6c66e;
+  color: #000;
+}
+
+.auth-buttons a {
+  font-weight: bold;
+  margin-left: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  background-color: #f6c66e;
+  color: #000;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.auth-buttons a.signup-btn:hover,
+.auth-buttons a.login-btn:hover {
+  background-color: #c5a844;
+  color: #000;
+  border-color: #c5a844;
+}
+
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #f6c66e;
+  cursor: pointer;
+}
+
+/* Main content */
+.location-main {
+  flex: 1;
+  max-width: 900px;
+  margin: 3rem auto 4rem;
+  padding: 0 1rem;
+  text-align: center;
+}
+
+.location-main h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #f6c66e;
+  font-weight: bold;
+}
+
+.location-main p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.location-info {
+  display: flex;
+  justify-content: space-around;
+  background-color: #222;
+  padding: 2rem 2rem;
+  border-radius: 10px;
+  color: #f6c66e;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.location-info > div {
+  flex: 1 1 280px;
+  text-align: left;
+}
+
+.location-info h2 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #f6c66e;
+}
+
+/* Map container */
+.map-container {
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(246, 198, 110, 0.6);
+}
+
+.map-container img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .location-info {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem 1rem;
+  }
+  .location-info > div {
+    text-align: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .auth-buttons {
+    display: none;
+  }
+  .nav-toggle {
+    display: block;
+  }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #222;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    border-radius: 0 0 0 10px;
+    padding: 1rem;
+    z-index: 999;
+  }
+  .nav-links.nav-active {
+    display: flex;
+  }
+}

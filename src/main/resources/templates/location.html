@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FitCore Gym - Location</title>
+
+  <link rel="stylesheet" href="/css/location.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">
+    ☰
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+
+    </ul>
+  </nav>
+
+
+  <div class="auth-buttons">
+
+    <!-- Show when logged out -->
+    <div th:if="${loggedInUser == null}">
+
+      <a href="/signup" class="signup-btn">
+        Sign Up
+      </a>
+
+      <a href="/login" class="login-btn">
+        Log In
+      </a>
+
+    </div>
+
+
+    <!-- Show when logged in -->
+    <div
+            th:if="${loggedInUser != null}"
+            class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">
+          User
+        </span>
+      </span>
+
+      <a href="/logout" class="login-btn">
+        Logout
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="location-main">
+
+  <h1>Our Location</h1>
+
+  <p>
+    Come visit FitCore Gym at our prime location!
+    We’re here to help you transform your body and mind.
+  </p>
+
+
+  <div class="location-info">
+
+    <div class="address">
+
+      <h2>Address</h2>
+
+      <p>
+        Bouddha, Kathmandu, Nepal
+      </p>
+
+    </div>
+
+
+    <div class="hours">
+
+      <h2>Opening Hours</h2>
+
+      <p>
+        Monday - Friday: 5:00 AM – 11:00 PM
+      </p>
+
+      <p>
+        Saturday - Sunday: 7:00 AM – 9:00 PM
+      </p>
+
+    </div>
+
+
+    <div class="contact-number">
+
+      <h2>Contact Number</h2>
+
+      <p>
+        +977-9878987876
+      </p>
+
+    </div>
+
+  </div>
+
+
+  <div class="map-container">
+
+    <img
+            src="assets/images (1).jpg"
+            alt="FitCore Gym Location"
+    />
+
+  </div>
+
+</main>
+
+
+<footer class="footer">
+
+  <h3>
+    Ready to Transform Your <span>Body?</span>
+  </h3>
+
+  <p>
+    <a href="mailto:fitcore@gmail.com">
+      fitcore@gmail.com
+    </a>
+  </p>
+
+
+  <div class="socials">
+
+    <a href="#">
+      Facebook
+    </a>
+
+    <a href="#">
+      Instagram
+    </a>
+
+  </div>
+
+
+  <div class="policy-links">
+
+    <a href="#">
+      Privacy Policy
+    </a>
+
+    |
+
+    <a href="#">
+      Terms &amp; Conditions
+    </a>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>
+```

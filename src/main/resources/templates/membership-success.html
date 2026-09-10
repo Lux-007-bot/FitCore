@@ -1,0 +1,139 @@
+```html
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Membership Confirmed - FitCore</title>
+
+    <link rel="stylesheet" href="/css/joinnow.css">
+
+    <style>
+        .success-container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 40px;
+            text-align: center;
+            background: #111;
+            border: 1px solid #333;
+            border-radius: 15px;
+        }
+
+        .success-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .success-container h1 {
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            margin-bottom: 30px;
+            opacity: 0.8;
+        }
+
+        .membership-details {
+            text-align: left;
+            margin: 25px 0;
+            padding: 20px;
+            border-radius: 10px;
+            background: #1a1a1a;
+        }
+
+        .membership-details p {
+            margin: 12px 0;
+        }
+
+        .membership-details strong {
+            display: inline-block;
+            width: 120px;
+        }
+
+        .home-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">FitCore</div>
+
+</header>
+
+
+<main class="success-container">
+
+    <div class="success-icon">
+        ✅
+    </div>
+
+    <h1>Membership Confirmed!</h1>
+
+    <p class="success-message">
+        Your FitCore membership has been successfully registered.
+    </p>
+
+
+    <div class="membership-details">
+
+        <p>
+            <strong>Plan:</strong>
+            <span th:text="${plan.name}">Pro</span>
+        </p>
+
+        <p>
+            <strong>Price:</strong>
+            Nrs<span th:text="${plan.price}">3500</span>
+        </p>
+
+        <p>
+            <strong>Start Date:</strong>
+            <span th:text="${membership.startDate}">2026-09-10</span>
+        </p>
+
+        <p>
+            <strong>End Date:</strong>
+            <span th:text="${membership.endDate}">2026-12-10</span>
+        </p>
+
+        <p>
+            <strong>Status:</strong>
+            <span th:text="${membership.status}">ACTIVE</span>
+        </p>
+
+    </div>
+
+
+    <p>
+        Welcome to FitCore!
+    </p>
+
+    <a href="/" class="home-btn">
+        Back to Home
+    </a>
+
+</main>
+
+
+<footer class="footer">
+
+    <p>
+        &copy; 2025 FitCore. All rights reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>
+```

@@ -1,0 +1,288 @@
+/* Reset some defaults */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  color: #eee;
+  line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+}
+
+.logo {
+  font-weight: 900;
+  font-size: 1.8rem;
+  color: #f6c66e;
+  letter-spacing: 2px;
+  user-select: none;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.8rem;
+}
+
+.nav-links li a {
+  color: #eee;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.3rem 0.5rem;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-links li a:hover,
+.nav-links li a.active {
+  background-color: #f6c66e;
+  color: #222;
+}
+
+/* Auth buttons */
+.auth-buttons a {
+  margin-left: 1rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  font-size: 0.9rem;
+  user-select: none;
+}
+
+.signup-btn {
+  background-color: transparent;
+  color: #f6c66e;
+  border: 2px solid #f6c66e;
+}
+
+.signup-btn:hover {
+  background-color: #f6c66e;
+  color: #222;
+}
+
+.login-btn {
+  background-color: #f6c66e;
+  color: #222;
+  border: none;
+}
+
+.login-btn:hover {
+  background-color: #d4b95b;
+}
+
+/* Mobile nav toggle button */
+.nav-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: #f6c66e;
+  cursor: pointer;
+}
+
+/* Membership Section */
+.membership-section {
+  padding: 3rem 1rem;
+  max-width: 1200px;
+  margin: 3rem auto;
+  text-align: center;
+  color: #eee;
+}
+
+.membership-section h1 {
+  font-size: 2.8rem;
+  margin-bottom: 2.5rem;
+  color: #f6c66e;
+  letter-spacing: 1.5px;
+}
+
+/* Plans container */
+.plans {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* Each plan */
+.plan {
+  background: rgba(34, 34, 34, 0.9);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 300px;
+  box-shadow: 0 0 15px rgba(246, 198, 110, 0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.3s ease;
+}
+
+.plan:hover {
+  transform: translateY(-10px);
+}
+
+.plan h2 {
+  color: #f6c66e;
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+}
+
+.plan p.price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+}
+
+.plan ul {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  text-align: left;
+  padding-left: 1.2rem;
+  color: #ddd;
+}
+
+.plan ul li {
+  margin: 0.7rem 0;
+  position: relative;
+  padding-left: 1.1rem;
+}
+
+.plan ul li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: #f6c66e;
+  font-weight: bold;
+}
+
+/* Join button */
+.join-btn {
+  background-color: #f6c66e;
+  color: #222;
+  border: none;
+  padding: 0.8rem 1.8rem;
+  font-weight: 700;
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  user-select: none;
+}
+
+.join-btn:hover {
+  background-color: #d4b95b;
+}
+
+/* Footer */
+.footer {
+  background-color: #222;
+  color: #ddd;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  margin-top: 4rem;
+}
+
+.footer h3 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: #f6c66e;
+}
+
+.footer h3 span {
+  font-weight: 900;
+}
+
+.footer p a {
+  color: #f6c66e;
+  text-decoration: none;
+}
+
+.footer p a:hover {
+  text-decoration: underline;
+}
+
+.socials {
+  margin: 1rem 0;
+}
+
+.socials a {
+  color: #f6c66e;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.socials a:hover {
+  text-decoration: underline;
+}
+
+.policy-links {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 1rem;
+}
+
+.policy-links a {
+  color: #aaa;
+  text-decoration: none;
+}
+
+.policy-links a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .plans {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #222;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 200px;
+    border-radius: 0 0 0 8px;
+  }
+
+  .nav-links.nav-active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 1rem 0;
+  }
+
+  .nav-toggle {
+    display: block;
+  }
+
+  .auth-buttons {
+    display: none;
+  }
+}

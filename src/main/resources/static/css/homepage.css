@@ -1,0 +1,354 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #111;
+  color: #fff;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #222;
+  position: relative;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #f6c66e;
+}
+
+/* Hamburger toggle hidden by default */
+.nav-toggle {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #f6c66e;
+  cursor: pointer;
+}
+
+/* Nav Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+  padding: 6px 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+  background-color: #f6c66e;
+  color: #000;
+}
+
+.signup-btn {
+  background-color: #f6c66e;
+  color: #000;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #000;
+  padding: 2rem 1rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero h1 span {
+  color: #f6c66e;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+  margin-top: 1rem;
+}
+
+/* Mission Section */
+.mission {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  background: #ddd;
+  color: #000;
+}
+
+.mission-img img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.mission-text span {
+  color: #c58c1e;
+  font-weight: bold;
+}
+
+.start-btn {
+  display: inline-block;
+  background-color: #f6c66e;
+  color: #000;
+  padding: 0.5rem 1rem;
+  margin-top: 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+/* Footer */
+.footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+.footer span {
+  color: #f6c66e;
+}
+
+.footer a {
+  color: #f6c66e;
+  text-decoration: none;
+  margin: 0 0.5rem;
+  display: inline-block;
+}
+
+.policy-links {
+  margin-top: 1rem;
+}
+
+/* Desktop styles */
+@media (min-width: 768px) {
+  .hero {
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: left;
+  }
+
+  .mission {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .mission-img,
+  .mission-text {
+    flex: 1;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 767px) {
+  .nav-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+    background-color: #222;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    z-index: 10;
+  }
+
+  /* When nav is active (toggled) */
+  .nav-links.nav-active {
+    max-height: 300px; /* enough to show all links */
+  }
+
+  .nav-links li {
+    margin: 1rem 0;
+    text-align: center;
+  }
+
+  .nav-links a {
+    font-size: 1.1rem;
+  }
+
+  .signup-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 0.5rem;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero-image img {
+    margin-top: 1rem;
+    max-width: 90vw;
+  }
+
+  .mission {
+    padding: 1rem;
+  }
+
+  .mission-text {
+    text-align: center;
+  }
+
+  .start-btn {
+    width: 100%;
+    padding: 0.75rem 0;
+    font-size: 1.1rem;
+  }
+
+  .footer {
+    padding: 1.5rem 1rem;
+  }
+
+  .footer a {
+    font-size: 1rem;
+    margin: 0 0.3rem;
+  }
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.login-btn {
+  background-color: transparent;
+  border: 2px solid #f6c66e;
+  color: #f6c66e;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #f6c66e;
+  color: #000;
+}
+
+/* Trainers Section */
+.trainers {
+  padding: 3rem 1rem;
+  background-color: #000; /* fixed background */
+  color: #f6c66e;
+  text-align: center;
+}
+
+.trainers h2 {
+  font-size: 2.2rem;
+  margin-bottom: 2rem;
+}
+
+.trainer-cards {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.trainer-card {
+  background-color: #222222;
+  border-radius: 10px;
+  padding: 1rem;
+  max-width: 280px;
+  box-shadow: 0 0 15px rgba(246, 198, 110, 0.6);
+  transition: transform 0.3s ease;
+}
+
+.trainer-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(246, 198, 110, 0.9);
+}
+
+.trainer-card img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  height: 280px;
+  margin-bottom: 1rem;
+}
+
+.trainer-card h3 {
+  margin: 0.5rem 0;
+  color: #f6c66e;
+}
+
+.trainer-card p {
+  color: #ccc;
+  font-style: italic;
+  font-size: 0.95rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .trainer-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .trainer-card {
+    max-width: 90%;
+    margin-bottom: 1.5rem;
+  }
+}
+.logout-btn {
+    /* Inherit signup button style */
+    background-color: #f6c66e;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #e0b850; /* slightly darker on hover */
+    color: #000;
+  .user-welcome {
+    color: #f6c66e;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-right: 0.5rem;
+  }
+
+  .logged-in-area {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+

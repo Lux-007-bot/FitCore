@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Users - Admin Panel</title>
+    <link rel="stylesheet" href="adminDashboard.css" />
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+        th, td {
+            padding: 12px 15px;
+            border: 1px solid #333;
+            text-align: left;
+        }
+        th {
+            background-color: #f6c66e;
+            color: #000;
+        }
+        tr:nth-child(even) {
+            background-color: #222;
+        }
+        tr:nth-child(odd) {
+            background-color: #111;
+        }
+        .action-btn {
+            background-color: #f6c66e;
+            color: #000;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .action-btn:hover {
+            background-color: #e0b850;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">Admin Panel</div>
+    <div class="auth-buttons">
+        <a href="../adminLogout.html" class="logout-btn">Logout</a>
+    </div>
+</header>
+
+<main style="padding: 2rem;">
+    <h1>All Registered Users</h1>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Action</th>
+        </tr>
+
+        <!-- Users will be loaded from the database
+             through the Spring Boot backend later. -->
+
+    </table>
+</main>
+
+</body>
+</html>

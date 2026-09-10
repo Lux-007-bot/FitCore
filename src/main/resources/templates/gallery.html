@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FitCore Gallery</title>
+
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">
+    ☰
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+
+    </ul>
+  </nav>
+
+
+  <div class="auth-buttons">
+
+    <!-- Show when logged out -->
+    <div th:if="${loggedInUser == null}">
+
+      <a href="/signup" class="signup-btn">
+        Sign Up
+      </a>
+
+      <a href="/login" class="login-btn">
+        Log In
+      </a>
+
+    </div>
+
+
+    <!-- Show when logged in -->
+    <div
+            th:if="${loggedInUser != null}"
+            class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">
+          User
+        </span>
+      </span>
+
+      <a href="/logout" class="login-btn">
+        Logout
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="gallery">
+
+  <h2>
+    <span>Our Gallery</span>
+  </h2>
+
+  <div class="gallery-images">
+
+    <img
+            src="assets/interior.webp"
+            alt="Gym Interior"
+    />
+
+    <img
+            src="assets/workoutarea.jpg"
+            alt="Workout Area"
+    />
+
+    <img
+            src="assets/group.jpg"
+            alt="Group Class"
+    />
+
+    <img
+            src="assets/trainerhelping.jpg"
+            alt="Trainer Helping Client"
+    />
+
+    <img
+            src="assets/equipments.jpg"
+            alt="Equipment"
+    />
+
+    <img
+            src="assets/outdoor.jpg"
+            alt="Outdoor Workout"
+    />
+
+  </div>
+
+</section>
+
+
+<footer class="footer">
+
+  <p>
+    &copy; 2025 FitCore Gym
+  </p>
+
+</footer>
+
+
+<script>
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>
+```

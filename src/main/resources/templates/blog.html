@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>FitCore Blog</title>
+
+  <link rel="stylesheet" href="/css/blog.css">
+</head>
+
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">
+    ☰
+  </button>
+
+  <nav>
+    <ul class="nav-links">
+
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+
+    </ul>
+  </nav>
+
+
+  <div class="auth-buttons">
+
+    <!-- Show when logged out -->
+    <div th:if="${loggedInUser == null}">
+
+      <a href="/signup" class="signup-btn">
+        Sign Up
+      </a>
+
+      <a href="/login" class="login-btn">
+        Log In
+      </a>
+
+    </div>
+
+
+    <!-- Show when logged in -->
+    <div
+            th:if="${loggedInUser != null}"
+            class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome,
+        <span th:text="${loggedInUser.fullname}">
+          User
+        </span>
+      </span>
+
+      <a href="/logout" class="login-btn">
+        Logout
+      </a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section class="blog">
+
+  <h2>
+    <span>Latest Fitness Tips &amp; News</span>
+  </h2>
+
+
+  <article class="post">
+
+    <h3>
+      5 Tips to Stay Motivated for Your Workout
+    </h3>
+
+    <p class="date">
+      June 27, 2025
+    </p>
+
+    <img
+            src="assets/lfiting.webp"
+            alt="Motivation tips"
+    />
+
+    <p>
+      Staying motivated can be tough, but with the right mindset and habits,
+      you can keep pushing forward. Start by setting realistic goals,
+      tracking your progress, and finding a workout buddy to keep you
+      accountable. Remember to celebrate small wins and adjust your routine
+      as you grow stronger.
+    </p>
+
+    <p>
+      Another helpful tip is to vary your workouts to avoid boredom.
+      Mixing cardio, strength training, and flexibility exercises can keep
+      your body and mind engaged. Also, consider listening to motivating
+      music or podcasts during your sessions.
+    </p>
+
+  </article>
+
+
+  <article class="post">
+
+    <h3>
+      The Benefits of Strength Training for All Ages
+    </h3>
+
+    <p class="date">
+      June 20, 2025
+    </p>
+
+    <img
+            src="assets/stregthtraining.jpg"
+            alt="Strength training benefits"
+    />
+
+    <p>
+      Strength training isn’t just for bodybuilders — it benefits people
+      of all ages by improving bone density, boosting metabolism, and
+      increasing functional strength. Incorporating weightlifting or
+      resistance exercises two to three times a week can help prevent
+      injuries and support daily activities.
+    </p>
+
+    <p>
+      It's important to focus on proper form and start with manageable
+      weights. Consulting a trainer can help design a personalized plan
+      that fits your fitness level and goals.
+    </p>
+
+  </article>
+
+
+  <article class="post">
+
+    <h3>
+      How Proper Nutrition Fuels Your Fitness Journey
+    </h3>
+
+    <p class="date">
+      June 13, 2025
+    </p>
+
+    <img
+            src="assets/nutririon.jpg"
+            alt="Nutrition tips"
+    />
+
+    <p>
+      Nutrition plays a vital role in reaching your fitness goals.
+      Balanced meals with the right amount of protein, carbohydrates,
+      and fats help repair muscles and provide energy. Including a
+      variety of fruits and vegetables ensures you get essential
+      vitamins and minerals.
+    </p>
+
+    <p>
+      Meal prepping and planning ahead can make it easier to stick to
+      your nutrition goals. Remember to hydrate well and adjust your
+      calorie intake based on your activity level and body goals.
+    </p>
+
+  </article>
+
+</section>
+
+
+<footer class="footer">
+
+  <h3>
+    Ready to Transform Your <span>Body?</span>
+  </h3>
+
+  <p>
+    <a href="mailto:fitcore@gmail.com">
+      fitcore@gmail.com
+    </a>
+  </p>
+
+
+  <div class="socials">
+
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+
+  </div>
+
+
+  <div class="policy-links">
+
+    <a href="#">
+      Privacy Policy
+    </a>
+
+    |
+
+    <a href="#">
+      Terms &amp; Conditions
+    </a>
+
+  </div>
+
+</footer>
+
+
+<script>
+
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle?.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>
+```

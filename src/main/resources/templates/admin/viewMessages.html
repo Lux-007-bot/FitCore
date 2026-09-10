@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Messages - FitCore Admin</title>
+    <link rel="stylesheet" href="adminDashboard.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background-color: #222;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+            color: #fff;
+        }
+        th {
+            background-color: #333;
+            color: #f6c66e;
+        }
+        tr:hover {
+            background-color: #333;
+        }
+        .page-header {
+            margin-top: 2rem;
+            color: #f6c66e;
+        }
+    </style>
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">FitCore Admin</div>
+    <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="adminDashboard.html">Dashboard</a></li>
+            <li><a href="viewUsers.html">Users</a></li>
+            <li><a href="viewMessages.html" class="active">Messages</a></li>
+            <li><a href="settings.html">Settings</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-buttons">
+        <span>Welcome, Admin!</span>
+        <a href="../adminLogout.html" class="logout-btn">Log Out</a>
+    </div>
+</header>
+
+<main class="dashboard-container">
+    <h2 class="page-header">Contact Messages</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th>Date</th>
+        </tr>
+
+        <!-- Contact messages will be loaded from the database
+             through the Spring Boot backend later. -->
+
+    </table>
+</main>
+
+<footer class="footer">
+    <h3>FitCore Admin Panel</h3>
+    <p>&copy; 2025 FitCore</p>
+</footer>
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-active');
+    });
+</script>
+
+</body>
+</html>

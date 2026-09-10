@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FitCore Gym</title>
+  <link rel="stylesheet" href="/css/homepage.css">
+</head>
+<body>
+
+<header class="navbar">
+
+  <div class="logo">FitCore</div>
+
+  <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
+
+  <nav>
+    <ul class="nav-links">
+      <li><a href="/" class="active">Home</a></li>
+      <li><a href="/about">About</a></li>
+      <li><a href="/membership">Membership</a></li>
+      <li><a href="/location">Location</a></li>
+      <li><a href="/contact">Contact</a></li>
+      <li><a href="/blog">Blog</a></li>
+      <li><a href="/gallery">Gallery</a></li>
+    </ul>
+  </nav>
+
+  <div class="auth-buttons">
+
+    <!-- Show when user is NOT logged in -->
+    <div th:if="${loggedInUser == null}">
+      <a href="/signup" class="signup-btn">Sign Up</a>
+      <a href="/login" class="login-btn">Log In</a>
+    </div>
+
+    <!-- Show when user IS logged in -->
+    <div th:if="${loggedInUser != null}" class="logged-in-area">
+
+      <span class="user-welcome">
+        Welcome, <span th:text="${loggedInUser.fullname}"></span>
+      </span>
+
+      <a href="/logout" class="login-btn">Logout</a>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<!-- Hero Section -->
+<section class="hero">
+
+  <div class="hero-text">
+    <h1>Transform Your <span>Body</span></h1>
+  </div>
+
+  <div class="hero-image">
+    <img
+            src="assets/sports-background-power-athletic-guy-600nw-504794356.webp"
+            alt="Muscular Man"
+    />
+  </div>
+
+</section>
+
+
+<!-- Mission Section -->
+<section class="mission">
+
+  <div class="mission-img">
+    <img
+            src="assets/bodybuilder-athlete-lifting-weight-fire-explode-arm-concept-background-81528851.webp"
+            alt="Man Lifting Dumbbell"
+    />
+  </div>
+
+  <div class="mission-text">
+
+    <h2>
+      <span>Our Mission</span>
+    </h2>
+
+    <p>
+      "We believe fitness is more than just working out—it's about building strength,
+      confidence, and community. Our goal is to provide a space where everyone,
+      from beginners to athletes, can challenge themselves and grow. Whether you're here
+      to lift, sweat, or transform, we're here to support your journey."
+    </p>
+
+    <a href="/membership" class="start-btn">Start Now</a>
+
+  </div>
+
+</section>
+
+
+<!-- Trainers Section Start -->
+<section class="trainers">
+
+  <h2>
+    <span>Meet Our Trainers</span>
+  </h2>
+
+  <div class="trainer-cards">
+
+    <a href="/ram" class="trainer-card" aria-label="Trainer Ram Profile">
+
+      <img
+              src="assets/ppp.jpg"
+              alt="Trainer Ram"
+      />
+
+      <h3>Ram</h3>
+
+      <p>Strength & Conditioning Coach</p>
+
+    </a>
+
+
+    <a href="/sita" class="trainer-card" aria-label="Trainer Sita Profile">
+
+      <img
+              src="assets/ppf.jpg"
+              alt="Trainer Sita"
+      />
+
+      <h3>Sita</h3>
+
+      <p>Yoga & Flexibility Expert</p>
+
+    </a>
+
+
+    <a href="/laxman" class="trainer-card" aria-label="Trainer Laxman Profile">
+
+      <img
+              src="assets/ppp.jpg"
+              alt="Trainer Laxman"
+      />
+
+      <h3>Laxman</h3>
+
+      <p>Cardio & Endurance Specialist</p>
+
+    </a>
+
+  </div>
+
+</section>
+<!-- Trainers Section End -->
+
+
+<!-- Footer -->
+<footer class="footer">
+
+  <h3>
+    Ready to Transform Your <span>Body?</span>
+  </h3>
+
+  <p>
+    <a href="mailto:fitcore@gmail.com">fitcore@gmail.com</a>
+  </p>
+
+  <div class="socials">
+    <a href="#">Facebook</a>
+    <a href="#">Instagram</a>
+  </div>
+
+  <div class="policy-links">
+    <a href="#">Privacy Policy</a> |
+    <a href="#">Terms & Conditions</a>
+  </div>
+
+</footer>
+
+
+<script>
+
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  navToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('nav-active');
+  });
+
+</script>
+
+</body>
+</html>

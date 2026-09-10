@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Signup Successful - FitCore Gym</title>
+    <link rel="stylesheet" href="/css/signup.css">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">FitCore Gym</div>
+
+    <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
+
+    <nav>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/location">Location</a></li>
+            <li><a href="/membership">Membership</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+        </ul>
+    </nav>
+
+    <div class="auth-buttons">
+        <a href="/signup" class="signup-btn">Sign Up</a>
+        <a href="/login" class="login-btn">Log In</a>
+    </div>
+</header>
+
+<main>
+    <section class="signup-section">
+
+        <h1>Signup Successful!</h1>
+
+        <p class="login-link">
+            Your FitCore Gym account has been created successfully.
+        </p>
+
+        <p class="login-link">
+            You can now continue to the login page and access your account.
+        </p>
+
+        <a href="/login" class="signup-btn form-btn">
+            Continue to Login
+        </a>
+
+    </section>
+</main>
+
+<footer class="footer">
+    &copy; 2025 FitCore Gym. All rights reserved.
+</footer>
+
+<script>
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('nav-active');
+    });
+</script>
+
+</body>
+</html>
