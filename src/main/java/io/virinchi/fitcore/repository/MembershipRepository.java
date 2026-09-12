@@ -8,4 +8,7 @@ import java.util.List;
 public interface MembershipRepository extends JpaRepository<Membership, Integer> {
 
     List<Membership> findByUserId(Integer userId);
+
+    long countByStatus(String status);
+
 }

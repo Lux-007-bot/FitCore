@@ -1,71 +1,507 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>Admin Dashboard - FitCore</title>
+
   <link rel="stylesheet" href="/css/adminDashboard.css">
+
+  <style>
+    .management-card {
+      text-decoration: none;
+      color: inherit;
+    }
+  </style>
+
 </head>
+
 <body>
-<!-- Navbar -->
-<header class="navbar">
-  <div class="logo">FitCore Admin</div>
-  <button class="nav-toggle" aria-label="toggle navigation">&#9776;</button>
-  <nav>
-    <ul class="nav-links">
-      <li><a href="adminDashboard.html" class="active">Dashboard</a></li>
-      <li><a href="viewUsers.html">Users</a></li>
-      <li><a href="viewMessages.html">Messages</a></li>
-      <li><a href="settings.html">Settings</a></li>
-    </ul>
+
+<!-- ================= SIDEBAR ================= -->
+
+<aside class="sidebar">
+
+  <div class="brand">
+    <div class="brand-icon">F</div>
+
+    <div>
+      <h2>FitCore</h2>
+      <span>Admin Panel</span>
+    </div>
+  </div>
+
+
+  <nav class="sidebar-nav">
+
+    <a href="/admin/dashboard" class="nav-item active">
+      <span class="nav-icon">▦</span>
+      <span>Dashboard</span>
+    </a>
+
+    <a href="/admin/users" class="nav-item">
+      <span class="nav-icon">♙</span>
+      <span>Users</span>
+    </a>
+
+    <a href="/admin/membership-management" class="nav-item">
+      <span class="nav-icon">▣</span>
+      <span>Memberships</span>
+    </a>
+
+    <a href="/admin/trainers" class="nav-item">
+      <span class="nav-icon">♟</span>
+      <span>Trainers</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">◷</span>
+      <span>Classes</span>
+    </a>
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">✉</span>
+      <span>Messages</span>
+    </a>
+
   </nav>
-  <div class="auth-buttons">
-    <span>Welcome, Admin!</span>
-    <a href="../adminLogout.html" class="logout-btn">Log Out</a>
-  </div>
-</header>
 
-<!-- Dashboard Content -->
-<main class="dashboard-container">
-  <div class="dashboard-header">
-    <h1>Admin Dashboard</h1>
-    <p>Manage users, messages, and settings from here.</p>
+
+  <div class="sidebar-bottom">
+
+    <a href="#" class="nav-item">
+      <span class="nav-icon">⚙</span>
+      <span>Settings</span>
+    </a>
+
+    <a href="/admin/logout" class="logout-link">
+      <span class="nav-icon">↪</span>
+      <span>Log Out</span>
+    </a>
+
   </div>
 
-  <div class="dashboard-cards">
-    <div class="dashboard-card">
-      <h3>Manage Users</h3>
-      <p>View, edit, or delete users registered on FitCore.</p>
-      <a href="viewUsers.html" class="start-btn">Go</a>
+</aside>
+
+
+<!-- ================= MAIN CONTENT ================= -->
+
+<div class="main-content">
+
+
+  <!-- Top bar -->
+
+  <header class="topbar">
+
+    <button class="mobile-menu" id="mobileMenu">
+      ☰
+    </button>
+
+
+    <div class="page-title">
+
+      <h1>Dashboard</h1>
+
+      <p>
+        Overview of your FitCore gym management system
+      </p>
+
     </div>
 
-    <div class="dashboard-card">
-      <h3>Messages</h3>
-      <p>Check all messages sent through the contact page.</p>
-      <a href="viewMessages.html" class="start-btn">Go</a>
+
+    <div class="admin-profile">
+
+      <div class="profile-avatar">
+        A
+      </div>
+
+
+      <div class="profile-info">
+
+        <strong th:text="${session.loggedInAdmin.fullname}">
+          Admin
+        </strong>
+
+        <span>Administrator</span>
+
+      </div>
+
     </div>
 
-    <div class="dashboard-card">
-      <h3>Settings</h3>
-      <p>Update site settings, admin password, and more.</p>
-      <a href="settings.html" class="start-btn">Go</a>
-    </div>
-  </div>
-</main>
+  </header>
 
-<!-- Footer -->
-<footer class="footer">
-  <h3>FitCore Admin Panel</h3>
-  <p>&copy; 2025 FitCore</p>
-</footer>
+
+  <!-- ================= DASHBOARD ================= -->
+
+  <main class="dashboard">
+
+
+    <!-- Welcome -->
+
+    <section class="welcome-card">
+
+      <div>
+
+        <span class="welcome-label">
+          WELCOME BACK
+        </span>
+
+        <h2>
+
+          Hello,
+
+          <span th:text="${session.loggedInAdmin.fullname}">
+            Admin
+          </span>
+
+          👋
+
+        </h2>
+
+        <p>
+          Here's what's happening with FitCore today.
+        </p>
+
+      </div>
+
+
+      <div class="welcome-decoration">
+        FITCORE
+      </div>
+
+    </section>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <section class="section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2>Overview</h2>
+
+          <p>
+            Your gym management at a glance
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="stats-grid">
+
+
+        <!-- Total Users -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon users-icon">
+            ♙
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Total Users
+            </span>
+
+            <strong th:text="${totalUsers}">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Active Members -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon membership-icon">
+            ▣
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Active Members
+            </span>
+
+            <strong th:text="${totalMemberships}">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Membership Plans -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon trainer-icon">
+            ▣
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Membership Plans
+            </span>
+
+            <strong th:text="${totalPlans}">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <!-- Admins -->
+
+        <div class="stat-card">
+
+          <div class="stat-icon class-icon">
+            ◷
+          </div>
+
+          <div class="stat-info">
+
+            <span>
+              Admins
+            </span>
+
+            <strong th:text="${totalAdmins}">
+              0
+            </strong>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= MANAGEMENT ================= -->
+
+    <section class="section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <h2>
+            Management
+          </h2>
+
+          <p>
+            Quick access to FitCore management tools
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="management-grid">
+
+
+        <!-- ================= USERS ================= -->
+
+        <a href="/admin/users" class="management-card">
+
+          <div class="management-icon">
+            ♙
+          </div>
+
+
+          <div class="management-content">
+
+            <h3>
+              Manage Users
+            </h3>
+
+            <p>
+              View and manage registered FitCore users.
+            </p>
+
+            <span class="coming-soon">
+              Manage Users →
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- ================= MEMBERSHIPS ================= -->
+
+        <a href="/admin/membership-management"
+           class="management-card">
+
+          <div class="management-icon">
+            ▣
+          </div>
+
+
+          <div class="management-content">
+
+            <h3>
+              Memberships
+            </h3>
+
+            <p>
+              Manage membership plans and member subscriptions.
+            </p>
+
+            <span class="coming-soon">
+              Manage Memberships →
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- ================= TRAINERS ================= -->
+
+        <a href="/admin/trainers"
+           class="management-card">
+
+          <div class="management-icon">
+            ♟
+          </div>
+
+
+          <div class="management-content">
+
+            <h3>
+              Trainers
+            </h3>
+
+            <p>
+              Add, update and manage FitCore trainers.
+            </p>
+
+            <span class="coming-soon">
+              Manage Trainers →
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- ================= CLASSES ================= -->
+
+        <div class="management-card">
+
+          <div class="management-icon">
+            ◷
+          </div>
+
+
+          <div class="management-content">
+
+            <h3>
+              Classes
+            </h3>
+
+            <p>
+              Manage gym classes and schedules.
+            </p>
+
+            <span class="coming-soon">
+              Coming soon
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ================= SYSTEM STATUS ================= -->
+
+    <section class="system-card">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+
+        <div>
+
+          <strong>
+            System Online
+          </strong>
+
+          <p>
+            FitCore management system is running normally.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <span class="system-version">
+        Spring Boot
+      </span>
+
+    </section>
+
+
+  </main>
+
+
+  <!-- ================= FOOTER ================= -->
+
+  <footer class="footer">
+
+    <p>
+      &copy; 2026 FitCore Gym. All rights reserved.
+    </p>
+
+  </footer>
+
+</div>
+
+
+<!-- ================= MOBILE MENU ================= -->
 
 <script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('nav-active');
+
+  const mobileMenu =
+          document.getElementById("mobileMenu");
+
+  const sidebar =
+          document.querySelector(".sidebar");
+
+
+  mobileMenu.addEventListener("click", () => {
+
+    sidebar.classList.toggle("sidebar-open");
+
   });
+
 </script>
+
+
 </body>
+
 </html>

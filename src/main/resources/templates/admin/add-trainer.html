@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Trainer - FitCore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+        }
+
+        .navbar {
+            background: #222;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f6c66e;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #f6c66e;
+            border: 2px solid #f6c66e;
+            padding: 9px 18px;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #f6c66e;
+            color: #000;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 35px;
+            background: #1d1d1d;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f6c66e;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 15px;
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #f6c66e;
+        }
+
+        .hint {
+            color: #999;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            border: 2px solid #f6c66e;
+            color: #f6c66e;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #f6c66e;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        FitCore
+    </div>
+
+    <a href="/admin/trainers" class="back-btn">
+        Back
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <h1>Add Trainer</h1>
+
+    <form
+            action="/admin/trainers/new"
+            method="post"
+            enctype="multipart/form-data"
+            th:object="${trainer}">
+
+        <div class="form-group">
+
+            <label for="name">
+                Trainer Name
+            </label>
+
+            <input
+                    type="text"
+                    id="name"
+                    th:field="*{name}"
+                    placeholder="Enter trainer name"
+                    required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="email">
+                Email
+            </label>
+
+            <input
+                    type="email"
+                    id="email"
+                    th:field="*{email}"
+                    placeholder="Enter email"
+                    required>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="phone">
+                Phone
+            </label>
+
+            <input
+                    type="text"
+                    id="phone"
+                    th:field="*{phone}"
+                    placeholder="Enter phone number">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="specialization">
+                Specialization
+            </label>
+
+            <input
+                    type="text"
+                    id="specialization"
+                    th:field="*{specialization}"
+                    placeholder="e.g. Strength Training">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="experienceYears">
+                Experience (Years)
+            </label>
+
+            <input
+                    type="number"
+                    id="experienceYears"
+                    th:field="*{experienceYears}"
+                    min="0"
+                    placeholder="Enter years of experience">
+
+        </div>
+
+
+        <!-- TRAINER IMAGE UPLOAD -->
+
+        <div class="form-group">
+
+            <label for="imageFile">
+                Trainer Image
+            </label>
+
+            <input
+                    type="file"
+                    id="imageFile"
+                    name="imageFile"
+                    accept="image/*">
+
+            <div class="hint">
+                Select a trainer image from your computer.
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="description">
+                Description
+            </label>
+
+            <textarea
+                    id="description"
+                    th:field="*{description}"
+                    placeholder="Enter trainer description"></textarea>
+
+        </div>
+
+
+        <button
+                type="submit"
+                class="submit-btn">
+
+            Add Trainer
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

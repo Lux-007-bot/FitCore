@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    ```
+    <title>User Details - FitCore</title>
+
+    <link rel="stylesheet" href="/css/adminDashboard.css">
+
+    <style>
+
+        .user-details-page {
+            padding: 35px 40px;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 25px;
+            padding: 9px 15px;
+            border-radius: 7px;
+            background: #f6c66e;
+            color: #111;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background: #e0b850;
+        }
+
+        .details-header {
+            margin-bottom: 25px;
+        }
+
+        .details-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .details-header p {
+            margin-top: 7px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .user-details-card {
+            max-width: 750px;
+            background: #1a1a1a;
+            border: 1px solid #2d2d2d;
+            border-radius: 13px;
+            padding: 30px;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #2d2d2d;
+        }
+
+        .profile-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #f6c66e;
+            color: #111;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .profile-section h2 {
+            margin: 0;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        .profile-section p {
+            margin: 5px 0 0;
+            color: #777;
+            font-size: 13px;
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .detail-item {
+            background: #202020;
+            border: 1px solid #2d2d2d;
+            border-radius: 9px;
+            padding: 16px;
+        }
+
+        .detail-item span {
+            display: block;
+            color: #777;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 7px;
+        }
+
+        .detail-item strong {
+            color: #ddd;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        /* Active status */
+        .status-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(76, 175, 80, 0.12);
+            color: #7bd87f;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Inactive status */
+        .status-badge.inactive {
+            background: rgba(255, 80, 80, 0.12);
+            color: #ff7777;
+        }
+
+        @media (max-width: 650px) {
+
+            .user-details-page {
+                padding: 25px 18px;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+    ```
+
+</head>
+
+<body>
+
+<div class="main-content" style="margin-left: 0;">
+
+    ```
+    <main class="user-details-page">
+
+        <a href="/admin/users" class="back-button">
+            ← Back to Users
+        </a>
+
+        <div class="details-header">
+
+            <h1>User Details</h1>
+
+            <p>
+                View information about this FitCore user.
+            </p>
+
+        </div>
+
+        <div class="user-details-card">
+
+            <div class="profile-section">
+
+                <div class="profile-avatar">
+
+                <span th:text="${#strings.substring(user.fullname, 0, 1)}">
+                    U
+                </span>
+
+                </div>
+
+                <div>
+
+                    <h2 th:text="${user.fullname}">
+                        User Name
+                    </h2>
+
+                    <p th:text="${user.email}">
+                        user@example.com
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="details-grid">
+
+                <div class="detail-item">
+
+                    <span>User ID</span>
+
+                    <strong th:text="${user.id}">
+                        1
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Status</span>
+
+                    <strong>
+
+                    <span
+                            class="status-badge"
+                            th:classappend="${!user.active ? ' inactive' : ''}"
+                            th:text="${user.active ? 'Active' : 'Inactive'}">
+                        Active
+                    </span>
+
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Full Name</span>
+
+                    <strong th:text="${user.fullname}">
+                        User Name
+                    </strong>
+
+                </div>
+
+                <div class="detail-item">
+
+                    <span>Email</span>
+
+                    <strong th:text="${user.email}">
+                        user@example.com
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+    ```
+
+</div>
+
+</body>
+</html>

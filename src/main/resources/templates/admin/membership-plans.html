@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    ```
+    <title>Manage Membership Plans - FitCore</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #f6c66e;
+        }
+
+        .back-button {
+            padding: 10px 18px;
+            background-color: #222;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .back-button:hover {
+            background-color: #333;
+        }
+
+        .add-button {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 12px 20px;
+            background-color: #f6c66e;
+            color: #111;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .add-button:hover {
+            background-color: #e5b85e;
+        }
+
+        .stats {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .stats h2 {
+            margin: 0 0 5px;
+            color: #f6c66e;
+            font-size: 28px;
+        }
+
+        .stats p {
+            margin: 0;
+            color: #aaa;
+        }
+
+        .table-container {
+            background-color: #222;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #2a2a2a;
+            color: #f6c66e;
+            font-weight: 600;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #292929;
+        }
+
+        .action-button {
+            display: inline-block;
+            padding: 7px 12px;
+            margin-right: 5px;
+            border-radius: 5px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .edit-button {
+            background-color: #f6c66e;
+            color: #111;
+        }
+
+        .edit-button:hover {
+            background-color: #e5b85e;
+        }
+
+        .delete-button {
+            background-color: #b33a3a;
+            color: #fff;
+        }
+
+        .delete-button:hover {
+            background-color: #d14a4a;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #aaa;
+        }
+
+        .price {
+            color: #f6c66e;
+            font-weight: 600;
+        }
+
+        @media (max-width: 700px) {
+
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .back-button {
+                width: fit-content;
+            }
+        }
+    </style>
+    ```
+
+</head>
+
+<body>
+
+<div class="container">
+
+    ```
+    <div class="header">
+
+        <h1>Manage Membership Plans</h1>
+
+        <a href="/admin/dashboard" class="back-button">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+    <a href="/admin/membership-plans/new" class="add-button">
+        + Add Membership Plan
+    </a>
+
+    <div class="stats">
+
+        <h2 th:text="${plans.size()}">0</h2>
+
+        <p>Total Membership Plans</p>
+
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+            <tr>
+                <th>ID</th>
+                <th>Plan Name</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Actions</th>
+            </tr>
+
+            </thead>
+
+            <tbody>
+
+            <tr th:each="plan : ${plans}">
+
+                <td th:text="${plan.id}">
+                    1
+                </td>
+
+                <td th:text="${plan.name}">
+                    Basic
+                </td>
+
+                <td th:text="${plan.durationMonths + ' Month(s)'}">
+                    1 Month
+                </td>
+
+                <td
+                        class="price"
+                        th:text="${'Rs. ' + plan.price}">
+                    Rs. 1000
+                </td>
+
+                <td th:text="${plan.description}">
+                    Basic membership plan
+                </td>
+
+                <td>
+
+                    <a
+                            href="#"
+                            class="action-button edit-button">
+                        Edit
+                    </a>
+
+                    <button
+                            type="button"
+                            class="action-button delete-button"
+                            onclick="alert('Delete functionality will be connected next.');">
+                        Delete
+                    </button>
+
+                </td>
+
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(plans)}">
+
+                <td colspan="6" class="empty">
+                    No membership plans found.
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+    ```
+
+</div>
+
+</body>
+
+</html>

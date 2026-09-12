@@ -5,6 +5,7 @@ import io.virinchi.fitcore.repository.MembershipRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MembershipService {
@@ -26,4 +27,14 @@ public class MembershipService {
     public List<Membership> getAllMemberships() {
         return membershipRepository.findAll();
     }
+
+    public Optional<Membership> getMembershipById(Integer id) {
+        return membershipRepository.findById(id);
+    }
+
+    public void deleteMembership(Integer id) {
+        membershipRepository.deleteById(id);
+    }
+
+
 }
