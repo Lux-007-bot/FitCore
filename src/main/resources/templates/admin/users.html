@@ -3,13 +3,16 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    ```
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
     <title>Manage Users - FitCore</title>
 
-    <link rel="stylesheet" href="/css/adminDashboard.css">
+    <link rel="stylesheet"
+          href="/css/adminDashboard.css">
 
     <style>
 
@@ -167,7 +170,8 @@
             color: #aaa !important;
         }
 
-        /* Active status */
+        /* Status */
+
         .status-badge {
             display: inline-block;
             padding: 5px 10px;
@@ -178,11 +182,12 @@
             font-weight: 600;
         }
 
-        /* Inactive status */
         .status-badge.inactive {
             background: rgba(255, 80, 80, 0.12);
             color: #ff7777;
         }
+
+        /* Action Buttons */
 
         .action-buttons {
             display: flex;
@@ -231,11 +236,77 @@
             background: #351d1d;
         }
 
+        /* Empty Message */
+
         .empty-message {
             padding: 50px !important;
             text-align: center !important;
             color: #777 !important;
         }
+
+        /* Pagination */
+
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .pagination-info {
+            color: #777;
+            font-size: 12px;
+        }
+
+        .pagination-info strong {
+            color: #ccc;
+        }
+
+        .pagination {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pagination a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 34px;
+            height: 34px;
+            padding: 0 10px;
+            box-sizing: border-box;
+            border: 1px solid #333;
+            border-radius: 7px;
+            background: #1a1a1a;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .pagination a:hover {
+            background: #2c2c2c;
+            color: #fff;
+            border-color: #555;
+        }
+
+        .pagination a.active {
+            background: #f6c66e;
+            color: #111;
+            border-color: #f6c66e;
+        }
+
+        .pagination a.disabled {
+            color: #555;
+            background: #151515;
+            border-color: #292929;
+            pointer-events: none;
+        }
+
+        /* Mobile */
 
         @media (max-width: 700px) {
 
@@ -261,10 +332,14 @@
                 align-self: flex-start;
             }
 
+            .pagination-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
         }
 
     </style>
-    ```
 
 </head>
 
@@ -272,28 +347,42 @@
 
 <div class="main-content" style="margin-left: 0;">
 
-    ```
     <main class="users-page">
 
-        <a href="/admin/dashboard" class="back-button">
+        <!-- Back to Dashboard -->
+
+        <a href="/admin/dashboard"
+           class="back-button">
+
             ← Back to Dashboard
+
         </a>
+
+
+        <!-- Header -->
 
         <div class="users-header">
 
             <div>
-                <h1>Manage Users</h1>
+
+                <h1>
+                    Manage Users
+                </h1>
 
                 <p>
                     View and manage all registered FitCore users.
                 </p>
+
             </div>
+
 
             <div class="user-count">
 
-                <span>Total Users</span>
+                <span>
+                    Total Users
+                </span>
 
-                <strong th:text="${users.size()}">
+                <strong th:text="${totalUsers}">
                     0
                 </strong>
 
@@ -301,80 +390,124 @@
 
         </div>
 
+
+        <!-- Search -->
+
         <div class="users-toolbar">
 
-            <div class="search-box">
+            <form
+                    class="search-box"
+                    method="get"
+                    action="/admin/users">
 
-                <span>⌕</span>
+                <span>
+                    ⌕
+                </span>
 
                 <input
                         type="text"
-                        id="userSearch"
+                        name="keyword"
                         placeholder="Search users..."
-                        onkeyup="searchUsers()">
+                        th:value="${keyword}">
 
-            </div>
+            </form>
 
         </div>
 
+
+        <!-- Users Table -->
+
         <div class="users-table-container">
 
-            <table class="users-table" id="usersTable">
+            <table
+                    class="users-table"
+                    id="usersTable">
 
                 <thead>
 
                 <tr>
+
                     <th>ID</th>
+
                     <th>Full Name</th>
+
                     <th>Email</th>
+
                     <th>Status</th>
+
                     <th>Actions</th>
+
                 </tr>
 
                 </thead>
+
 
                 <tbody>
 
                 <tr th:each="user : ${users}">
 
-                    <td class="user-id" th:text="${user.id}">
+                    <td
+                            class="user-id"
+                            th:text="${user.id}">
                         1
                     </td>
 
-                    <td class="user-name" th:text="${user.fullname}">
+
+                    <td
+                            class="user-name"
+                            th:text="${user.fullname}">
                         John Doe
                     </td>
 
-                    <td class="user-email" th:text="${user.email}">
+
+                    <td
+                            class="user-email"
+                            th:text="${user.email}">
                         john@example.com
                     </td>
 
+
                     <td>
 
-                    <span
-                            class="status-badge"
-                            th:classappend="${!user.active ? ' inactive' : ''}"
-                            th:text="${user.active ? 'Active' : 'Inactive'}">
-                        Active
-                    </span>
+                        <span
+                                class="status-badge"
+                                th:classappend="${!user.active ? ' inactive' : ''}"
+                                th:text="${user.active ? 'Active' : 'Inactive'}">
+
+                            Active
+
+                        </span>
 
                     </td>
+
 
                     <td>
 
                         <div class="action-buttons">
 
+                            <!-- View -->
+
                             <a
                                     th:href="@{/admin/users/{id}(id=${user.id})}"
                                     class="action-button view-button">
+
                                 View
+
                             </a>
+
+
+                            <!-- Edit -->
 
                             <a
                                     th:href="@{/admin/users/{id}/edit(id=${user.id})}"
                                     class="action-button edit-button">
+
                                 Edit
+
                             </a>
+
+
+                            <!-- Delete -->
 
                             <form
                                     th:action="@{/admin/users/{id}/delete(id=${user.id})}"
@@ -385,7 +518,9 @@
                                 <button
                                         type="submit"
                                         class="action-button delete-button">
+
                                     Delete
+
                                 </button>
 
                             </form>
@@ -396,10 +531,17 @@
 
                 </tr>
 
+
+                <!-- No Users -->
+
                 <tr th:if="${#lists.isEmpty(users)}">
 
-                    <td colspan="5" class="empty-message">
+                    <td
+                            colspan="5"
+                            class="empty-message">
+
                         No registered users found.
+
                     </td>
 
                 </tr>
@@ -410,42 +552,102 @@
 
         </div>
 
+
+        <!-- Pagination -->
+
+        <div
+                class="pagination-container"
+                th:if="${totalUsers > 0}">
+
+            <!-- Showing Information -->
+
+            <div class="pagination-info">
+
+                Showing
+
+                <strong th:text="${startUser}">
+                    1
+                </strong>
+
+                -
+
+                <strong th:text="${endUser}">
+                    5
+                </strong>
+
+                of
+
+                <strong th:text="${totalUsers}">
+                    5
+                </strong>
+
+                users
+
+            </div>
+
+
+            <!-- Pagination Buttons -->
+
+            <div class="pagination">
+
+                <!-- Previous -->
+
+                <a
+                        th:if="${currentPage > 0}"
+                        th:href="@{/admin/users(page=${currentPage - 1}, keyword=${keyword})}">
+
+                    ←
+
+                </a>
+
+                <a
+                        th:if="${currentPage == 0}"
+                        class="disabled">
+
+                    ←
+
+                </a>
+
+
+                <!-- Page Numbers -->
+
+                <a
+                        th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+                        th:href="@{/admin/users(page=${pageNumber}, keyword=${keyword})}"
+                        th:text="${pageNumber + 1}"
+                        th:classappend="${pageNumber == currentPage ? ' active' : ''}">
+
+                    1
+
+                </a>
+
+
+                <!-- Next -->
+
+                <a
+                        th:if="${currentPage < totalPages - 1}"
+                        th:href="@{/admin/users(page=${currentPage + 1}, keyword=${keyword})}">
+
+                    →
+
+                </a>
+
+                <a
+                        th:if="${currentPage >= totalPages - 1}"
+                        class="disabled">
+
+                    →
+
+                </a>
+
+            </div>
+
+        </div>
+
     </main>
-    ```
 
 </div>
 
-<script>
-
-    function searchUsers() {
-
-        const input =
-            document.getElementById("userSearch");
-
-        const filter =
-            input.value.toLowerCase();
-
-        const rows =
-            document.querySelectorAll(
-                "#usersTable tbody tr"
-            );
-
-        rows.forEach(row => {
-
-            const text =
-                row.textContent.toLowerCase();
-
-            if (text.includes(filter)) {
-                row.style.display = "";
-            } else {
-                row.style.display = "none";
-            }
-
-        });
-
-    }
-
-</script>
-
 </body>
+
 </html>

@@ -96,19 +96,6 @@
             border-color: #f6c66e;
         }
 
-        .current-image {
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .current-image img {
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            border: 2px solid #f6c66e;
-        }
-
         .hint {
             color: #999;
             font-size: 13px;
@@ -148,7 +135,6 @@
 
 </header>
 
-
 <div class="container">
 
     <h1>Edit Trainer</h1>
@@ -158,23 +144,6 @@
             method="post"
             enctype="multipart/form-data"
             th:object="${trainer}">
-
-        <div class="form-group">
-
-            <label>Current Image</label>
-
-            <div class="current-image">
-
-                <img
-                        th:src="${trainer.imageUrl != null and !trainer.imageUrl.isEmpty()
-                        ? '/assets/' + trainer.imageUrl
-                        : '/assets/ppp.jpg'}"
-                        th:alt="${trainer.name}">
-
-            </div>
-
-        </div>
-
 
         <div class="form-group">
 
@@ -191,7 +160,6 @@
 
         </div>
 
-
         <div class="form-group">
 
             <label for="email">
@@ -207,7 +175,6 @@
 
         </div>
 
-
         <div class="form-group">
 
             <label for="phone">
@@ -221,7 +188,6 @@
                     placeholder="Enter phone number">
 
         </div>
-
 
         <div class="form-group">
 
@@ -237,7 +203,6 @@
 
         </div>
 
-
         <div class="form-group">
 
             <label for="experienceYears">
@@ -252,9 +217,6 @@
                     placeholder="Enter years of experience">
 
         </div>
-
-
-        <!-- NEW TRAINER IMAGE -->
 
         <div class="form-group">
 
@@ -274,7 +236,6 @@
 
         </div>
 
-
         <div class="form-group">
 
             <label for="description">
@@ -287,7 +248,6 @@
                     placeholder="Enter trainer description"></textarea>
 
         </div>
-
 
         <button
                 type="submit"
@@ -303,3 +263,4 @@
 
 </body>
 </html>
+

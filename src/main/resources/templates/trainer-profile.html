@@ -15,7 +15,6 @@
         Trainer Profile - FitCore
     </title>
 
-
     <style>
 
         * {
@@ -24,372 +23,195 @@
             box-sizing: border-box;
         }
 
-
         body {
-
             font-family: Arial, sans-serif;
-
             background-color: #111;
-
             color: white;
-
             min-height: 100vh;
-
         }
-
-
-        /* =========================
-           NAVBAR
-        ========================= */
 
         .navbar {
-
             background-color: #222;
-
             min-height: 75px;
-
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             padding: 0 6%;
-
             gap: 20px;
-
         }
-
 
         .logo {
-
             font-size: 30px;
-
             font-weight: bold;
-
             color: #f6c66e;
-
         }
-
 
         .nav-links {
-
             display: flex;
-
             list-style: none;
-
             gap: 25px;
-
         }
-
 
         .nav-links a {
-
             color: white;
-
             text-decoration: none;
-
             font-size: 15px;
-
             transition: color 0.3s ease;
-
         }
-
 
         .nav-links a:hover {
-
             color: #f6c66e;
-
         }
-
 
         .back-btn {
-
             border: 2px solid #f6c66e;
-
             color: #f6c66e;
-
             padding: 10px 18px;
-
             border-radius: 5px;
-
             text-decoration: none;
-
             font-weight: bold;
-
             transition: 0.3s ease;
-
         }
-
 
         .back-btn:hover {
-
             background-color: #f6c66e;
-
             color: #000;
-
         }
-
-
-        /* =========================
-           PROFILE SECTION
-        ========================= */
 
         .profile-section {
-
             min-height: calc(100vh - 75px);
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             padding: 60px 20px;
-
         }
 
-
         .profile-card {
-
             width: 900px;
-
             max-width: 100%;
-
             background-color: #1d1d1d;
-
             border: 1px solid #333;
-
             border-radius: 12px;
-
             padding: 45px;
-
             display: flex;
-
             gap: 50px;
-
             align-items: center;
-
             box-shadow:
                     0 10px 30px
                     rgba(0, 0, 0, 0.4);
-
         }
-
-
-        /* =========================
-           TRAINER IMAGE
-        ========================= */
 
         .profile-image {
-
             flex: 0 0 280px;
-
             text-align: center;
-
         }
-
 
         .profile-image img {
-
             width: 260px;
-
             height: 260px;
-
             object-fit: cover;
-
             border-radius: 50%;
-
             border: 4px solid #f6c66e;
-
         }
-
-
-        /* =========================
-           TRAINER INFORMATION
-        ========================= */
 
         .profile-info {
-
             flex: 1;
-
         }
-
 
         .profile-info h1 {
-
             font-size: 40px;
-
             margin-bottom: 10px;
-
         }
-
 
         .specialization {
-
             color: #f6c66e;
-
             font-size: 20px;
-
             font-weight: bold;
-
             margin-bottom: 25px;
-
         }
-
 
         .description {
-
             color: #ccc;
-
             line-height: 1.7;
-
             margin-bottom: 25px;
-
         }
-
 
         .details {
-
             display: flex;
-
             flex-direction: column;
-
             gap: 12px;
-
         }
-
 
         .detail {
-
             color: #ddd;
-
             font-size: 16px;
-
         }
-
 
         .detail strong {
-
             color: #f6c66e;
-
         }
-
-
-        /* =========================
-           FOOTER
-        ========================= */
 
         .footer {
-
             background-color: #222;
-
             text-align: center;
-
             padding: 25px;
-
             color: #aaa;
-
         }
-
 
         .footer span {
-
             color: #f6c66e;
-
         }
-
-
-        /* =========================
-           MOBILE
-        ========================= */
 
         @media (max-width: 768px) {
 
             .navbar {
-
                 height: auto;
-
                 padding: 20px;
-
                 flex-direction: column;
-
                 gap: 20px;
-
             }
-
 
             .nav-links {
-
                 flex-wrap: wrap;
-
                 justify-content: center;
-
                 gap: 15px;
-
             }
-
 
             .profile-card {
-
                 flex-direction: column;
-
                 text-align: center;
-
                 padding: 30px 20px;
-
             }
-
 
             .profile-image {
-
                 flex: none;
-
             }
-
 
             .profile-image img {
-
                 width: 200px;
-
                 height: 200px;
-
             }
-
 
             .profile-info h1 {
-
                 font-size: 30px;
-
             }
-
 
             .details {
-
                 text-align: left;
-
             }
-
         }
 
     </style>
 
 </head>
 
-
 <body>
-
-
-<!-- =========================
-     NAVBAR
-========================= -->
 
 <header class="navbar">
 
     <div class="logo">
         FitCore
     </div>
-
 
     <nav>
 
@@ -441,7 +263,6 @@
 
     </nav>
 
-
     <a
             href="/"
             class="back-btn">
@@ -452,42 +273,33 @@
 
 </header>
 
-
-<!-- =========================
-     TRAINER PROFILE
-========================= -->
-
 <section class="profile-section">
 
     <div class="profile-card">
 
-
-        <!-- Trainer Image -->
-
         <div class="profile-image">
 
             <img
-                    th:src="${trainer.imageUrl != null and !trainer.imageUrl.isEmpty()
-                    ? '/assets/' + trainer.imageUrl
-                    : '/assets/ppp.jpg'}"
+                    th:if="${trainer.imageData != null}"
+                    th:src="@{/trainer/{id}/image(id=${trainer.id})}"
+                    th:alt="${trainer.name}"
+                    alt="Trainer"
+            >
+
+            <img
+                    th:if="${trainer.imageData == null}"
+                    src="/assets/ppp.jpg"
                     th:alt="${trainer.name}"
                     alt="Trainer"
             >
 
         </div>
 
-
-        <!-- Trainer Information -->
-
         <div class="profile-info">
 
-
             <h1 th:text="${trainer.name}">
-
                 Trainer Name
-
             </h1>
-
 
             <p
                     class="specialization"
@@ -497,7 +309,6 @@
 
             </p>
 
-
             <p
                     class="description"
                     th:text="${trainer.description}">
@@ -506,9 +317,7 @@
 
             </p>
 
-
             <div class="details">
-
 
                 <div class="detail">
 
@@ -517,13 +326,10 @@
                     </strong>
 
                     <span th:text="${trainer.email}">
-
                         trainer@example.com
-
                     </span>
 
                 </div>
-
 
                 <div class="detail">
 
@@ -532,13 +338,10 @@
                     </strong>
 
                     <span th:text="${trainer.phone}">
-
                         9800000000
-
                     </span>
 
                 </div>
-
 
                 <div class="detail">
 
@@ -555,7 +358,6 @@
 
                 </div>
 
-
             </div>
 
         </div>
@@ -564,11 +366,6 @@
 
 </section>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer class="footer">
 
     <p>
@@ -576,7 +373,6 @@
     </p>
 
 </footer>
-
 
 </body>
 

@@ -54,10 +54,8 @@
     </ul>
   </nav>
 
-
   <div class="auth-buttons">
 
-    <!-- User is NOT logged in -->
     <div th:if="${loggedInUser == null}">
 
       <a href="/signup" class="signup-btn">
@@ -70,8 +68,6 @@
 
     </div>
 
-
-    <!-- User IS logged in -->
     <div
             th:if="${loggedInUser != null}"
             class="logged-in-area">
@@ -96,10 +92,6 @@
 </header>
 
 
-<!-- =========================
-     HERO SECTION
-========================= -->
-
 <section class="hero">
 
   <div class="hero-text">
@@ -109,7 +101,6 @@
     </h1>
 
   </div>
-
 
   <div class="hero-image">
 
@@ -123,10 +114,6 @@
 </section>
 
 
-<!-- =========================
-     MISSION SECTION
-========================= -->
-
 <section class="mission">
 
   <div class="mission-img">
@@ -137,7 +124,6 @@
     >
 
   </div>
-
 
   <div class="mission-text">
 
@@ -162,53 +148,39 @@
 </section>
 
 
-<!-- =========================
-     TRAINERS SECTION
-========================= -->
-
 <section class="trainers">
 
   <h2>
     <span>Meet Our Trainers</span>
   </h2>
 
-
   <div class="trainer-cards">
-
-
-    <!-- Dynamic Trainers -->
 
     <div
             class="trainer-card"
             th:each="trainer : ${trainers}">
 
-
-      <!-- Trainer Image -->
-
       <img
-              th:src="${trainer.imageUrl != null and !trainer.imageUrl.isEmpty()
-                    ? '/assets/' + trainer.imageUrl
-                    : '/assets/ppp.jpg'}"
+              th:if="${trainer.imageData != null}"
+              th:src="@{/trainer/{id}/image(id=${trainer.id})}"
               th:alt="${trainer.name}"
               alt="Trainer"
       >
 
-
-      <!-- Trainer Name -->
+      <img
+              th:if="${trainer.imageData == null}"
+              src="/assets/ppp.jpg"
+              th:alt="${trainer.name}"
+              alt="Trainer"
+      >
 
       <h3 th:text="${trainer.name}">
         Trainer Name
       </h3>
 
-
-      <!-- Trainer Specialization -->
-
       <p th:text="${trainer.specialization}">
         Trainer Specialization
       </p>
-
-
-      <!-- View Profile -->
 
       <a
               th:href="@{/trainer/{id}(id=${trainer.id})}"
@@ -219,9 +191,6 @@
       </a>
 
     </div>
-
-
-    <!-- No Trainers -->
 
     <div
             class="trainer-card"
@@ -237,15 +206,10 @@
 
     </div>
 
-
   </div>
 
 </section>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer class="footer">
 
@@ -253,13 +217,11 @@
     Ready to Transform Your <span>Body?</span>
   </h3>
 
-
   <p>
     <a href="mailto:fitcore@gmail.com">
       fitcore@gmail.com
     </a>
   </p>
-
 
   <div class="socials">
 
@@ -272,7 +234,6 @@
     </a>
 
   </div>
-
 
   <div class="policy-links">
 
@@ -291,10 +252,6 @@
 </footer>
 
 
-<!-- =========================
-     NAVIGATION SCRIPT
-========================= -->
-
 <script>
 
   const navToggle =
@@ -302,7 +259,6 @@
 
   const navLinks =
           document.querySelector('.nav-links');
-
 
   navToggle.addEventListener('click', () => {
 

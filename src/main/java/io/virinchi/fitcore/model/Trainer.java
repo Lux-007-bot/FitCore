@@ -28,8 +28,12 @@ public class Trainer {
     @Column(length = 500)
     private String description;
 
-    @Column(name = "image_url", length = 255)
-    private String imageUrl;
+    @Lob
+    @Column(name = "image_data", columnDefinition = "LONGBLOB")
+    private byte[] imageData;
+
+    @Column(name = "image_type", length = 100)
+    private String imageType;
 
     public Trainer() {
     }
@@ -90,11 +94,19 @@ public class Trainer {
         this.description = description;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public byte[] getImageData() {
+        return imageData;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public void setImageData(byte[] imageData) {
+        this.imageData = imageData;
+    }
+
+    public String getImageType() {
+        return imageType;
+    }
+
+    public void setImageType(String imageType) {
+        this.imageType = imageType;
     }
 }

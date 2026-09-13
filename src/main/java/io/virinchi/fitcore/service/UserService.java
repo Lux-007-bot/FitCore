@@ -2,6 +2,8 @@ package io.virinchi.fitcore.service;
 
 import io.virinchi.fitcore.model.User;
 import io.virinchi.fitcore.repository.UserRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,16 +51,49 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public boolean checkPassword(String rawPassword, String encodedPassword) {
-        return passwordEncoder.matches(rawPassword, encodedPassword);
+    public boolean checkPassword(
+            String rawPassword,
+            String encodedPassword) {
+
+        return passwordEncoder.matches(
+                rawPassword,
+                encodedPassword
+        );
     }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    // =========================================================
+    // PAGINATION
+    // =========================================================
+
+    public Page<User> getUsersPaginated(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
+
+    // =========================================================
+    // SEARCH + PAGINATION
+    // =========================================================
+
+    public Page<User> searchUsers(
+            String keyword,
+            Pageable pageable) {
+
+        return userRepository
+                .findByFullnameContainingIgnoreCaseOrEmailContainingIgnoreCase(
+                        keyword,
+                        keyword,
+                        pageable
+                );
+    }
+
+    // =========================================================
+    // PASSWORD ENCODING
+    // =========================================================
+
     public String encodePassword(String password) {
         return passwordEncoder.encode(password);
     }
-
 }

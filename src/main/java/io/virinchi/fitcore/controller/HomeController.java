@@ -43,10 +43,7 @@ public class HomeController {
         return "blog";
     }
 
-    @GetMapping("/contact")
-    public String contact() {
-        return "contact";
-    }
+
 
     @GetMapping("/gallery")
     public String gallery() {
@@ -68,18 +65,5 @@ public class HomeController {
         return "signup";
     }
 
-    @GetMapping("/ram")
-    public String ram() {
-        return "ram";
-    }
 
-    @GetMapping("/sita")
-    public String sita() {
-        return "sita";
-    }
-
-    @GetMapping("/laxman")
-    public String laxman() {
-        return "laxman";
-    }
 }

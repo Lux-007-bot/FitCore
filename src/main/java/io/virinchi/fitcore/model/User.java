@@ -17,11 +17,18 @@ public class User {
     @Column(nullable = false, unique = true, length = 150)
     private String email;
 
+    @JsonIgnore
     @Column(nullable = false, length = 255)
     private String password;
 
     @Column(nullable = false)
     private boolean active = true;
+
+    @Column(name = "verification_code", length = 6)
+    private String verificationCode;
+
+    @Column(nullable = false)
+    private boolean verified = false;
 
     public User() {
     }
@@ -50,7 +57,6 @@ public class User {
         this.email = email;
     }
 
-    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -65,5 +71,21 @@ public class User {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    public boolean isVerified() {
+        return verified;
+    }
+
+    public void setVerified(boolean verified) {
+        this.verified = verified;
     }
 }

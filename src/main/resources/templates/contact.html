@@ -2,12 +2,487 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>Contact Us - FitCore</title>
 
-  <link rel="stylesheet" href="/css/blog.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    /* ================= NAVBAR ================= */
+
+    .navbar {
+      width: 100%;
+      min-height: 75px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      padding: 0 6%;
+      gap: 35px;
+    }
+
+    .logo {
+      font-size: 30px;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 1px;
+      margin-right: auto;
+    }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #ddd;
+      font-size: 14px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #ff3b30;
+    }
+
+    .auth-buttons {
+      margin-left: 10px;
+    }
+
+    .auth-buttons > div {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .signup-btn,
+    .login-btn {
+      text-decoration: none;
+      padding: 10px 17px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: 0.3s;
+    }
+
+    .signup-btn {
+      color: white;
+      border: 1px solid #ff3b30;
+    }
+
+    .signup-btn:hover {
+      background: #ff3b30;
+    }
+
+    .login-btn {
+      background: #ff3b30;
+      color: white;
+    }
+
+    .login-btn:hover {
+      background: #e62f25;
+    }
+
+    .user-welcome {
+      color: #ddd;
+      font-size: 14px;
+    }
+
+    /* ================= HERO ================= */
+
+    .contact-hero {
+      background: #181818;
+      color: white;
+      text-align: center;
+      padding: 70px 20px;
+    }
+
+    .contact-hero h1 {
+      font-size: 46px;
+      margin-bottom: 15px;
+    }
+
+    .contact-hero h1 span {
+      color: #ff3b30;
+    }
+
+    .contact-hero p {
+      max-width: 650px;
+      margin: 0 auto;
+      color: #bbb;
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ================= CONTACT SECTION ================= */
+
+    .contact-container {
+      max-width: 1100px;
+      margin: 60px auto;
+      padding: 0 25px;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.4fr;
+      gap: 35px;
+      align-items: start;
+    }
+
+    /* ================= INFO CARD ================= */
+
+    .contact-info {
+      background: #111;
+      color: white;
+      padding: 35px;
+      border-radius: 14px;
+    }
+
+    .contact-info h2 {
+      font-size: 27px;
+      margin-bottom: 15px;
+    }
+
+    .contact-info h2 span {
+      color: #ff3b30;
+    }
+
+    .contact-info > p {
+      color: #bbb;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+
+    .info-item {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      background: #ff3b30;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-item h3 {
+      font-size: 15px;
+      margin-bottom: 5px;
+    }
+
+    .info-item p,
+    .info-item a {
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.5;
+      text-decoration: none;
+    }
+
+    .info-item a:hover {
+      color: #ff3b30;
+    }
+
+    /* ================= FORM ================= */
+
+    .contact-form-wrapper {
+      background: white;
+      padding: 40px;
+      border-radius: 14px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .contact-form-wrapper h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+      color: #777;
+      margin-bottom: 28px;
+      font-size: 14px;
+    }
+
+    .success-message {
+      background: #e9f8ee;
+      color: #19733a;
+      border: 1px solid #b8e5c6;
+      padding: 13px 15px;
+      border-radius: 7px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      padding: 13px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      outline: none;
+      transition: 0.3s;
+      background: #fafafa;
+    }
+
+    .form-group input {
+      height: 46px;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 140px;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: #ff3b30;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.08);
+    }
+
+    .submit-btn {
+      width: 100%;
+      border: none;
+      background: #ff3b30;
+      color: white;
+      padding: 14px;
+      border-radius: 7px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #e62f25;
+      transform: translateY(-1px);
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+      background: #111;
+      color: white;
+      text-align: center;
+      padding: 45px 20px;
+      margin-top: 80px;
+    }
+
+    .footer h3 {
+      font-size: 25px;
+      margin-bottom: 12px;
+    }
+
+    .footer h3 span {
+      color: #ff3b30;
+    }
+
+    .footer > p {
+      margin-bottom: 20px;
+    }
+
+    .footer > p a {
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .footer > p a:hover {
+      color: #ff3b30;
+    }
+
+    .socials {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin-bottom: 20px;
+    }
+
+    .socials a,
+    .policy-links a {
+      color: #aaa;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .socials a:hover,
+    .policy-links a:hover {
+      color: #ff3b30;
+    }
+
+    .policy-links {
+      color: #555;
+      font-size: 13px;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 1000px) {
+
+      .navbar {
+        padding: 0 4%;
+      }
+
+      .nav-links {
+        gap: 15px;
+      }
+
+      .nav-links a {
+        font-size: 13px;
+      }
+    }
+
+    @media (max-width: 850px) {
+
+      .navbar {
+        position: relative;
+        flex-wrap: wrap;
+        padding: 18px 5%;
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 20px 0 5px;
+      }
+
+      .nav-links.nav-active {
+        display: flex;
+      }
+
+      .auth-buttons {
+        position: absolute;
+        right: 70px;
+        top: 20px;
+      }
+
+      .logged-in-area .user-welcome {
+        display: none;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .logo {
+        font-size: 25px;
+      }
+
+      .auth-buttons {
+        right: 60px;
+      }
+
+      .signup-btn {
+        display: none;
+      }
+
+      .login-btn {
+        padding: 9px 12px;
+        font-size: 12px;
+      }
+
+      .contact-hero {
+        padding: 50px 20px;
+      }
+
+      .contact-hero h1 {
+        font-size: 36px;
+      }
+
+      .contact-container {
+        margin: 40px auto;
+        padding: 0 15px;
+      }
+
+      .contact-info,
+      .contact-form-wrapper {
+        padding: 25px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .footer {
+        margin-top: 50px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -16,13 +491,12 @@
 
   <div class="logo">FitCore</div>
 
-  <button class="nav-toggle" aria-label="toggle navigation">
+  <button class="nav-toggle" aria-label="Toggle navigation">
     &#9776;
   </button>
 
   <nav>
     <ul class="nav-links">
-
       <li><a href="/">Home</a></li>
       <li><a href="/about">About</a></li>
       <li><a href="/location">Location</a></li>
@@ -30,14 +504,12 @@
       <li><a href="/contact">Contact</a></li>
       <li><a href="/blog">Blog</a></li>
       <li><a href="/gallery">Gallery</a></li>
-
     </ul>
   </nav>
 
-
   <div class="auth-buttons">
 
-    <!-- Show when logged out -->
+    <!-- Logged out -->
     <div th:if="${loggedInUser == null}">
 
       <a href="/signup" class="signup-btn">
@@ -50,18 +522,16 @@
 
     </div>
 
+    <!-- Logged in -->
+    <div th:if="${loggedInUser != null}"
+         class="logged-in-area">
 
-    <!-- Show when logged in -->
-    <div
-            th:if="${loggedInUser != null}"
-            class="logged-in-area">
-
-      <span class="user-welcome">
-        Welcome,
-        <span th:text="${loggedInUser.fullname}">
-          User
-        </span>
-      </span>
+            <span class="user-welcome">
+                Welcome,
+                <span th:text="${loggedInUser.fullname}">
+                    User
+                </span>
+            </span>
 
       <a href="/logout" class="login-btn">
         Logout
@@ -74,85 +544,223 @@
 </header>
 
 
-<main class="contact-container">
+<!-- ================= HERO ================= -->
+
+<section class="contact-hero">
 
   <h1>
     Contact <span>FitCore</span>
   </h1>
 
-  <p class="contact-intro">
-    Have questions or want to get in touch? Fill out the form below
-    and we'll get back to you as soon as possible.
+  <p>
+    Have a question about our memberships, trainers, or services?
+    Send us a message and our team will be happy to help.
   </p>
 
-
-  <form
-          action="contactAction.html"
-          method="post"
-          class="contact-form"
-          novalidate>
-
-    <label for="name">
-      Name
-    </label>
-
-    <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Your full name"
-            required
-    />
+</section>
 
 
-    <label for="email">
-      Email
-    </label>
+<!-- ================= CONTACT ================= -->
 
-    <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-    />
+<main class="contact-container">
 
+  <div class="contact-grid">
 
-    <label for="subject">
-      Subject
-    </label>
+    <!-- Contact Information -->
 
-    <input
-            type="text"
-            id="subject"
-            name="subject"
-            placeholder="Subject of your message"
-            required
-    />
+    <section class="contact-info">
 
+      <h2>
+        Get in <span>Touch</span>
+      </h2>
 
-    <label for="message">
-      Message
-    </label>
+      <p>
+        We're here to help you get the most out of your
+        fitness journey at FitCore.
+      </p>
 
-    <textarea
-            id="message"
-            name="message"
-            rows="6"
-            placeholder="Write your message here..."
-            required></textarea>
+      <div class="info-item">
+
+        <div class="info-icon">
+          &#9993;
+        </div>
+
+        <div>
+          <h3>Email</h3>
+
+          <a href="mailto:fitcore@gmail.com">
+            fitcore@gmail.com
+          </a>
+        </div>
+
+      </div>
 
 
-    <button
-            type="submit"
-            class="submit-btn">
-      Send Message
-    </button>
+      <div class="info-item">
 
-  </form>
+        <div class="info-icon">
+          &#9742;
+        </div>
+
+        <div>
+          <h3>Phone</h3>
+
+          <p>
+            +977 9800000000
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-icon">
+          &#9679;
+        </div>
+
+        <div>
+          <h3>Opening Hours</h3>
+
+          <p>
+            Sunday - Friday<br>
+            6:00 AM - 9:00 PM
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="info-item">
+
+        <div class="info-icon">
+          &#8982;
+        </div>
+
+        <div>
+          <h3>Location</h3>
+
+          <p>
+            Kathmandu, Nepal
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- Contact Form -->
+
+    <section class="contact-form-wrapper">
+
+      <h2>Send Us a Message</h2>
+
+      <p class="form-subtitle">
+        Fill out the form below and we'll get back to you.
+      </p>
+
+
+      <!-- Success Message -->
+
+      <div
+              th:if="${successMessage}"
+              class="success-message"
+              th:text="${successMessage}">
+        Thank you! Your message has been received.
+      </div>
+
+
+      <form
+              action="/contact"
+              method="post"
+              class="contact-form"
+              novalidate>
+
+        <div class="form-row">
+
+          <div class="form-group">
+
+            <label for="name">
+              Name
+            </label>
+
+            <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Your full name"
+                    required>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="email">
+              Email
+            </label>
+
+            <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="you@example.com"
+                    required>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="subject">
+            Subject
+          </label>
+
+          <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  placeholder="What would you like to ask?"
+                  required>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="message">
+            Message
+          </label>
+
+          <textarea
+                  id="message"
+                  name="message"
+                  rows="6"
+                  placeholder="Write your message here..."
+                  required></textarea>
+
+        </div>
+
+
+        <button
+                type="submit"
+                class="submit-btn">
+          Send Message
+        </button>
+
+      </form>
+
+    </section>
+
+  </div>
 
 </main>
 
+
+<!-- ================= FOOTER ================= -->
 
 <footer class="footer">
 
@@ -186,7 +794,7 @@
       Privacy Policy
     </a>
 
-    |
+    <span> | </span>
 
     <a href="#">
       Terms &amp; Conditions
@@ -210,4 +818,4 @@
 
 </body>
 </html>
-```
+

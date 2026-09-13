@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
 
 @Controller
 public class TrainerController {
@@ -22,10 +18,6 @@ public class TrainerController {
     public TrainerController(TrainerService trainerService) {
         this.trainerService = trainerService;
     }
-
-    // =========================
-    // PUBLIC TRAINER PROFILE
-    // =========================
 
     @GetMapping("/trainer/{id}")
     public String viewTrainerProfile(
@@ -44,10 +36,20 @@ public class TrainerController {
         return "trainer-profile";
     }
 
+    @GetMapping("/trainer/{id}/image")
+    @ResponseBody
+    public byte[] getTrainerImage(
+            @PathVariable Integer id) {
 
-    // =========================
-    // ADMIN - MANAGE TRAINERS
-    // =========================
+        Trainer trainer =
+                trainerService.getTrainerById(id).orElse(null);
+
+        if (trainer == null || trainer.getImageData() == null) {
+            return new byte[0];
+        }
+
+        return trainer.getImageData();
+    }
 
     @GetMapping("/admin/trainers")
     public String manageTrainers(
@@ -66,11 +68,6 @@ public class TrainerController {
         return "admin/trainers";
     }
 
-
-    // =========================
-    // ADMIN - ADD TRAINER PAGE
-    // =========================
-
     @GetMapping("/admin/trainers/new")
     public String newTrainer(
             HttpSession session,
@@ -88,11 +85,6 @@ public class TrainerController {
         return "admin/add-trainer";
     }
 
-
-    // =========================
-    // ADMIN - CREATE TRAINER
-    // =========================
-
     @PostMapping("/admin/trainers/new")
     public String createTrainer(
             @ModelAttribute Trainer trainer,
@@ -103,38 +95,19 @@ public class TrainerController {
             return "redirect:/login";
         }
 
-        // Upload image
         if (imageFile != null && !imageFile.isEmpty()) {
 
             try {
+                trainer.setImageData(
+                        imageFile.getBytes()
+                );
 
-                String fileName =
-                        imageFile.getOriginalFilename();
-
-                if (fileName != null && !fileName.isBlank()) {
-
-                    Path uploadPath = Paths.get(
-                            "src/main/resources/static/assets"
-                    );
-
-                    Files.createDirectories(uploadPath);
-
-                    Path filePath =
-                            uploadPath.resolve(fileName);
-
-                    Files.copy(
-                            imageFile.getInputStream(),
-                            filePath,
-                            StandardCopyOption.REPLACE_EXISTING
-                    );
-
-                    trainer.setImageUrl(fileName);
-                }
+                trainer.setImageType(
+                        imageFile.getContentType()
+                );
 
             } catch (IOException e) {
-
                 e.printStackTrace();
-
                 return "redirect:/admin/trainers/new";
             }
         }
@@ -143,11 +116,6 @@ public class TrainerController {
 
         return "redirect:/admin/trainers";
     }
-
-
-    // =========================
-    // ADMIN - EDIT TRAINER PAGE
-    // =========================
 
     @GetMapping("/admin/trainers/{id}/edit")
     public String editTrainer(
@@ -173,11 +141,6 @@ public class TrainerController {
 
         return "admin/edit-trainer";
     }
-
-
-    // =========================
-    // ADMIN - UPDATE TRAINER
-    // =========================
 
     @PostMapping("/admin/trainers/{id}/edit")
     public String updateTrainer(
@@ -221,39 +184,18 @@ public class TrainerController {
                 trainer.getDescription()
         );
 
-
-        // Only replace image if a new image was selected
         if (imageFile != null && !imageFile.isEmpty()) {
 
             try {
+                existingTrainer.setImageData(
+                        imageFile.getBytes()
+                );
 
-                String fileName =
-                        imageFile.getOriginalFilename();
-
-                if (fileName != null && !fileName.isBlank()) {
-
-                    Path uploadPath = Paths.get(
-                            "src/main/resources/static/assets"
-                    );
-
-                    Files.createDirectories(uploadPath);
-
-                    Path filePath =
-                            uploadPath.resolve(fileName);
-
-                    Files.copy(
-                            imageFile.getInputStream(),
-                            filePath,
-                            StandardCopyOption.REPLACE_EXISTING
-                    );
-
-                    existingTrainer.setImageUrl(
-                            fileName
-                    );
-                }
+                existingTrainer.setImageType(
+                        imageFile.getContentType()
+                );
 
             } catch (IOException e) {
-
                 e.printStackTrace();
 
                 return "redirect:/admin/trainers/"
@@ -262,18 +204,12 @@ public class TrainerController {
             }
         }
 
-
         trainerService.saveTrainer(
                 existingTrainer
         );
 
         return "redirect:/admin/trainers";
     }
-
-
-    // =========================
-    // ADMIN - DELETE TRAINER
-    // =========================
 
     @PostMapping("/admin/trainers/{id}/delete")
     public String deleteTrainer(

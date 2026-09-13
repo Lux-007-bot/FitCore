@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    ```
     <title>Manage Memberships - FitCore</title>
 
     <style>
@@ -65,6 +64,27 @@
         .stats p {
             margin: 0;
             color: #aaa;
+        }
+
+        .search-box {
+            margin-bottom: 20px;
+        }
+
+        .search-box input {
+            width: 100%;
+            max-width: 350px;
+            padding: 12px 15px;
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .search-box input:focus {
+            border-color: #f6c66e;
         }
 
         .table-container {
@@ -185,9 +205,12 @@
             .back-button {
                 width: fit-content;
             }
+
+            .search-box input {
+                max-width: 100%;
+            }
         }
     </style>
-    ```
 
 </head>
 
@@ -195,7 +218,6 @@
 
 <div class="container">
 
-    ```
     <div class="header">
 
         <h1>Manage Memberships</h1>
@@ -214,9 +236,19 @@
 
     </div>
 
+    <div class="search-box">
+
+        <input
+                type="text"
+                id="membershipSearch"
+                placeholder="Search memberships..."
+                onkeyup="searchMemberships">
+
+    </div>
+
     <div class="table-container">
 
-        <table>
+        <table id="membershipsTable">
 
             <thead>
 
@@ -240,7 +272,6 @@
                     1
                 </td>
 
-                <!-- Member -->
                 <td>
 
                     <div
@@ -275,13 +306,13 @@
 
                 <td>
 
-                <span
-                        class="status"
-                        th:classappend="${membership.status == 'ACTIVE'} ? ' active' :
-                                       (${membership.status == 'EXPIRED'} ? ' expired' : ' pending')"
-                        th:text="${membership.status}">
-                    ACTIVE
-                </span>
+                    <span
+                            class="status"
+                            th:classappend="${membership.status == 'ACTIVE'} ? ' active' :
+                                           (${membership.status == 'EXPIRED'} ? ' expired' : ' pending')"
+                            th:text="${membership.status}">
+                        ACTIVE
+                    </span>
 
                 </td>
 
@@ -324,10 +355,42 @@
         </table>
 
     </div>
-    ```
 
 </div>
+
+<script>
+
+    function searchMemberships() {
+
+        const input =
+            document.getElementById("membershipSearch");
+
+        const filter =
+            input.value.toLowerCase();
+
+        const rows =
+            document.querySelectorAll(
+                "#membershipsTable tbody tr"
+            );
+
+        rows.forEach(row => {
+
+            const text =
+                row.textContent.toLowerCase();
+
+            if (text.includes(filter)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+
+        });
+
+    }
+
+</script>
 
 </body>
 
 </html>
+

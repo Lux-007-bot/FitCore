@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - FitCore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #111;
+            color: #fff;
+        }
+
+        .verification-container {
+            width: 100%;
+            max-width: 430px;
+            padding: 20px;
+        }
+
+        .verification-card {
+            background: #222;
+            padding: 40px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .logo {
+            color: #f6c66e;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 25px;
+        }
+
+        h2 {
+            margin: 0 0 12px;
+            font-size: 26px;
+        }
+
+        .description {
+            color: #aaa;
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .code-input {
+            width: 100%;
+            padding: 14px;
+            background: #111;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 22px;
+            text-align: center;
+            letter-spacing: 8px;
+            outline: none;
+        }
+
+        .code-input:focus {
+            border-color: #f6c66e;
+        }
+
+        .verify-button {
+            width: 100%;
+            margin-top: 20px;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            background: #f6c66e;
+            color: #111;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .verify-button:hover {
+            background: #eab85c;
+        }
+
+        .error {
+            margin-top: 18px;
+            color: #ff6b6b;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            .verification-card {
+                padding: 30px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="verification-container">
+
+    <div class="verification-card">
+
+        <div class="logo">FitCore</div>
+
+        <h2>Verify Your Email</h2>
+
+        <p class="description">
+            We've sent a 6-digit verification code to your email address.
+            Enter the code below to activate your account.
+        </p>
+
+        <form th:action="@{/verify}" method="post">
+
+            <input
+                    type="hidden"
+                    name="email"
+                    th:value="${email}">
+
+            <input
+                    type="text"
+                    name="verificationCode"
+                    class="code-input"
+                    placeholder="000000"
+                    maxlength="6"
+                    inputmode="numeric"
+                    pattern="[0-9]{6}"
+                    required>
+
+            <button
+                    type="submit"
+                    class="verify-button">
+                Verify Email
+            </button>
+
+        </form>
+
+        <p
+                th:if="${error}"
+                th:text="${error}"
+                class="error">
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
