@@ -16,8 +16,8 @@
 
     body {
       font-family: Arial, Helvetica, sans-serif;
-      background: #f7f7f7;
-      color: #222;
+      background: #111;
+      color: #fff;
       min-height: 100vh;
     }
 
@@ -71,7 +71,7 @@
     }
 
     .nav-links a:hover {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .auth-buttons {
@@ -96,20 +96,22 @@
 
     .signup-btn {
       color: white;
-      border: 1px solid #ff3b30;
+      border: 1px solid #f6c66e;
     }
 
     .signup-btn:hover {
-      background: #ff3b30;
+      background: #f6c66e;
+      color: #111;
     }
 
     .login-btn {
-      background: #ff3b30;
-      color: white;
+      background: #f6c66e;
+      color: #111;
     }
 
     .login-btn:hover {
-      background: #e62f25;
+      background: #c58c1e;
+      color: #111;
     }
 
     .user-welcome {
@@ -132,7 +134,7 @@
     }
 
     .contact-hero h1 span {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .contact-hero p {
@@ -173,7 +175,7 @@
     }
 
     .contact-info h2 span {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .contact-info > p {
@@ -191,7 +193,8 @@
     .info-icon {
       width: 42px;
       height: 42px;
-      background: #ff3b30;
+      background: #f6c66e;
+      color: #111;
       border-radius: 8px;
       display: flex;
       align-items: center;
@@ -214,33 +217,34 @@
     }
 
     .info-item a:hover {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     /* ================= FORM ================= */
 
     .contact-form-wrapper {
-      background: white;
+      background: #222;
       padding: 40px;
       border-radius: 14px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
     }
 
     .contact-form-wrapper h2 {
       font-size: 28px;
       margin-bottom: 8px;
+      color: #fff;
     }
 
     .form-subtitle {
-      color: #777;
+      color: #999;
       margin-bottom: 28px;
       font-size: 14px;
     }
 
     .success-message {
-      background: #e9f8ee;
-      color: #19733a;
-      border: 1px solid #b8e5c6;
+      background: #163d24;
+      color: #5ee88a;
+      border: 1px solid #2f6b45;
       padding: 13px 15px;
       border-radius: 7px;
       margin-bottom: 20px;
@@ -269,20 +273,26 @@
       font-size: 14px;
       font-weight: 700;
       margin-bottom: 8px;
-      color: #333;
+      color: #f6c66e;
     }
 
     .form-group input,
     .form-group textarea {
       width: 100%;
-      border: 1px solid #ddd;
+      border: 1px solid #333;
       border-radius: 7px;
       padding: 13px 14px;
       font-family: inherit;
       font-size: 14px;
       outline: none;
       transition: 0.3s;
-      background: #fafafa;
+      background: #1a1a1a;
+      color: #fff;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder {
+      color: #888;
     }
 
     .form-group input {
@@ -296,16 +306,16 @@
 
     .form-group input:focus,
     .form-group textarea:focus {
-      border-color: #ff3b30;
-      background: white;
-      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.08);
+      border-color: #f6c66e;
+      background: #222;
+      box-shadow: 0 0 0 3px rgba(246, 198, 110, 0.15);
     }
 
     .submit-btn {
       width: 100%;
       border: none;
-      background: #ff3b30;
-      color: white;
+      background: #f6c66e;
+      color: #111;
       padding: 14px;
       border-radius: 7px;
       font-size: 15px;
@@ -315,7 +325,7 @@
     }
 
     .submit-btn:hover {
-      background: #e62f25;
+      background: #c58c1e;
       transform: translateY(-1px);
     }
 
@@ -335,7 +345,7 @@
     }
 
     .footer h3 span {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .footer > p {
@@ -348,7 +358,7 @@
     }
 
     .footer > p a:hover {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .socials {
@@ -367,7 +377,7 @@
 
     .socials a:hover,
     .policy-links a:hover {
-      color: #ff3b30;
+      color: #f6c66e;
     }
 
     .policy-links {
@@ -482,6 +492,94 @@
         margin-top: 50px;
       }
     }
+    /* ================= MY PREVIOUS MESSAGES ================= */
+
+    .my-messages-section {
+      max-width: 1100px;
+      margin: 0 auto 60px;
+      padding: 0 25px;
+    }
+
+    .my-messages-section h2 {
+      font-size: 26px;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .my-messages-section h2 span {
+      color: #f6c66e;
+    }
+
+    .message-card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 25px;
+      margin-bottom: 18px;
+    }
+
+    .message-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .status-badge {
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status-unread {
+      background: #493c18;
+      color: #f6c66e;
+    }
+
+    .status-replied {
+      background: #163d24;
+      color: #5ee88a;
+    }
+
+    .message-subject {
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .message-label {
+      color: #f6c66e;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      margin-top: 12px;
+    }
+
+    .message-text {
+      background: #111;
+      border-radius: 8px;
+      padding: 14px;
+      color: #ccc;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .reply-text {
+      background: #111;
+      border: 1px solid #f6c66e;
+      border-radius: 8px;
+      padding: 14px;
+      color: #fff;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
   </style>
 </head>
 
@@ -504,6 +602,7 @@
       <li><a href="/contact">Contact</a></li>
       <li><a href="/blog">Blog</a></li>
       <li><a href="/gallery">Gallery</a></li>
+      <li th:if="${loggedInUser != null}"><a href="#my-messages">My Messages</a></li>
     </ul>
   </nav>
 
@@ -760,6 +859,49 @@
 </main>
 
 
+<!-- ================= MY PREVIOUS MESSAGES ================= -->
+
+<section
+        th:if="${loggedInUser != null and !#lists.isEmpty(myMessages)}"
+        id="my-messages"
+        class="my-messages-section">
+
+  <h2>Your Previous <span>Messages</span></h2>
+
+  <div th:each="msg : ${myMessages}" class="message-card">
+
+    <div class="message-meta">
+      <span th:text="${msg.createdAt}">2026-09-13</span>
+
+      <span
+              class="status-badge"
+              th:classappend="${msg.status == 'REPLIED'} ? ' status-replied' : ' status-unread'"
+              th:text="${msg.status}">
+        UNREAD
+      </span>
+    </div>
+
+    <div class="message-subject" th:text="${msg.subject}">
+      Subject
+    </div>
+
+    <div class="message-label">Your Message</div>
+    <div class="message-text" th:text="${msg.message}">
+      Original message text.
+    </div>
+
+    <div th:if="${msg.reply != null}">
+      <div class="message-label">FitCore's Reply</div>
+      <div class="reply-text" th:text="${msg.reply}">
+        Reply text.
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+
 <!-- ================= FOOTER ================= -->
 
 <footer class="footer">
@@ -818,4 +960,3 @@
 
 </body>
 </html>
-

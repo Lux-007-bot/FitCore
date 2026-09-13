@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Messages - FitCore</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #111;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        h1 {
+            margin: 0;
+            color: #f6c66e;
+        }
+
+        .back-button {
+            padding: 10px 18px;
+            background-color: #222;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .back-button:hover {
+            background-color: #333;
+        }
+
+        .stats {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+
+        .stats h2 {
+            margin: 0 0 5px;
+            color: #f6c66e;
+            font-size: 28px;
+        }
+
+        .stats p {
+            margin: 0;
+            color: #aaa;
+        }
+
+        .table-container {
+            background-color: #222;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+
+        th {
+            background-color: #2a2a2a;
+            color: #f6c66e;
+            font-weight: 600;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        tr:hover {
+            background-color: #292929;
+        }
+
+        .sender-name {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .sender-email {
+            color: #999;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .unread {
+            background-color: #493c18;
+            color: #f6c66e;
+        }
+
+        .replied {
+            background-color: #163d24;
+            color: #5ee88a;
+        }
+
+        .action-button {
+            padding: 7px 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .view-button {
+            background-color: #f6c66e;
+            color: #111;
+        }
+
+        .view-button:hover {
+            background-color: #ffd98c;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #aaa;
+        }
+
+        @media (max-width: 700px) {
+            .container {
+                margin: 20px auto;
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Contact Messages</h1>
+        <a href="/admin/dashboard" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <div class="stats">
+        <h2 th:text="${messages.size()}">0</h2>
+        <p>Total Messages</p>
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>From</th>
+                <th>Subject</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="msg : ${messages}">
+
+                <td th:text="${msg.createdAt}">2026-09-13</td>
+
+                <td>
+                    <div class="sender-name" th:text="${msg.name}">John Doe</div>
+                    <div class="sender-email" th:text="${msg.email}">john@example.com</div>
+                </td>
+
+                <td th:text="${msg.subject}">Membership question</td>
+
+                <td>
+                    <span
+                            class="status"
+                            th:classappend="${msg.status == 'REPLIED'} ? ' replied' : ' unread'"
+                            th:text="${msg.status}">
+                        UNREAD
+                    </span>
+                </td>
+
+                <td>
+                    <a th:href="@{/admin/contact-messages/{id}(id=${msg.id})}" class="action-button view-button">View / Reply</a>
+                </td>
+
+            </tr>
+
+            <tr th:if="${#lists.isEmpty(messages)}">
+                <td colspan="5" class="empty">No contact messages yet.</td>
+            </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

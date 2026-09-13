@@ -57,14 +57,20 @@
       <span>Trainers</span>
     </a>
 
-    <a href="#" class="nav-item">
-      <span class="nav-icon">◷</span>
-      <span>Classes</span>
+    <a href="/admin/contact-messages" class="nav-item">
+      <span class="nav-icon">✉</span>
+      <span>Messages</span>
+      <span
+              th:if="${unreadContactMessages > 0}"
+              th:text="${unreadContactMessages}"
+              style="margin-left: 8px; background-color: #f6c66e; color: #111; border-radius: 10px; padding: 2px 8px; font-size: 12px; font-weight: 700;">
+        0
+      </span>
     </a>
 
     <a href="#" class="nav-item">
-      <span class="nav-icon">✉</span>
-      <span>Messages</span>
+      <span class="nav-icon">◷</span>
+      <span>Classes</span>
     </a>
 
   </nav>
@@ -396,6 +402,35 @@
 
             <span class="coming-soon">
               Manage Trainers →
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <!-- ================= CONTACT MESSAGES ================= -->
+
+        <a href="/admin/contact-messages"
+           class="management-card">
+
+          <div class="management-icon">
+            ✉
+          </div>
+
+
+          <div class="management-content">
+
+            <h3>
+              Contact Messages
+            </h3>
+
+            <p>
+              View and reply to messages sent through the contact form.
+            </p>
+
+            <span class="coming-soon">
+              View Messages →
             </span>
 
           </div>
