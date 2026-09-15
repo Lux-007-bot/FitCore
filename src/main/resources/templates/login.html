@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8" />
@@ -42,6 +42,25 @@
       margin: 0 0 30px;
       line-height: 1.6;
       opacity: 0.75;
+    }
+
+    .login-error {
+      margin: 0 0 20px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      background: rgba(255, 107, 107, 0.1);
+      border: 1px solid rgba(255, 107, 107, 0.35);
+      color: #ff6b6b;
+      font-weight: 600;
+    }
+    .login-success {
+      margin: 0 0 20px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      background: rgba(246, 198, 110, 0.1);
+      border: 1px solid rgba(246, 198, 110, 0.35);
+      color: #f6c66e;
+      font-weight: 600;
     }
 
     .login-form {
@@ -125,7 +144,6 @@
 
 </head>
 
-
 <body>
 
 <header class="navbar">
@@ -172,7 +190,6 @@
     </ul>
   </nav>
 
-
   <div class="auth-buttons">
 
     <a href="/signup" class="signup-btn">
@@ -187,7 +204,6 @@
 
 </header>
 
-
 <main>
 
   <section class="login-section">
@@ -198,7 +214,16 @@
       Great to see you again — ready to crush your fitness goals?
     </p>
 
-
+    <p
+            th:if="${error}"
+            th:text="${error}"
+            class="login-error">
+    </p>
+    <p
+            th:if="${param.verified}"
+            class="login-success">
+      Signup successful! Your email has been verified. You can now log in.
+    </p>
     <form
             class="login-form"
             action="/login"
@@ -217,7 +242,6 @@
               required
       />
 
-
       <label for="password">
         Password
       </label>
@@ -231,7 +255,6 @@
               required
       />
 
-
       <button
               type="submit"
               class="signup-btn form-btn">
@@ -239,7 +262,6 @@
       </button>
 
     </form>
-
 
     <p class="signup-link">
       Don't have an account?
@@ -252,13 +274,11 @@
 
 </main>
 
-
 <footer class="footer">
 
   &copy; 2025 FitCore Gym. All rights reserved.
 
 </footer>
-
 
 <script>
 
@@ -274,4 +294,4 @@
 </body>
 
 </html>
-```
+

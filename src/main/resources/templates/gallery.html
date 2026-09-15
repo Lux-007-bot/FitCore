@@ -2,77 +2,77 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <title>FitCore Gallery</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="/css/blog.css">
+  <title>Gallery - FitCore</title>
+
+  <link rel="stylesheet" href="/css/gallery.css">
+
 </head>
 
 <body>
 
 <header class="navbar">
 
-  <div class="logo">FitCore</div>
+  <div class="logo">
+    FitCore
+  </div>
 
-  <button class="nav-toggle" aria-label="toggle navigation">
+  <button class="nav-toggle" type="button">
     ☰
   </button>
 
-  <nav>
-    <ul class="nav-links">
+  <ul class="nav-links">
 
-      <li><a href="/">Home</a></li>
-      <li><a href="/about">About</a></li>
-      <li><a href="/location">Location</a></li>
-      <li><a href="/membership">Membership</a></li>
-      <li><a href="/contact">Contact</a></li>
-      <li><a href="/blog">Blog</a></li>
-      <li><a href="/gallery">Gallery</a></li>
+    <li>
+      <a href="/">Home</a>
+    </li>
 
-    </ul>
-  </nav>
+    <li>
+      <a href="/about">About</a>
+    </li>
 
+    <li>
+      <a href="/location">Location</a>
+    </li>
+
+    <li>
+      <a href="/contact">Contact</a>
+    </li>
+
+    <li>
+      <a href="/blog">Blog</a>
+    </li>
+
+    <li>
+      <a href="/gallery">Gallery</a>
+    </li>
+
+    <li>
+      <a href="/membership">Membership</a>
+    </li>
+
+    <li>
+      <a href="/trainers">Trainers</a>
+    </li>
+
+  </ul>
 
   <div class="auth-buttons">
 
-    <!-- Show when logged out -->
-    <div th:if="${loggedInUser == null}">
+    <a href="/signup" class="signup-btn">
+      Sign Up
+    </a>
 
-      <a href="/signup" class="signup-btn">
-        Sign Up
-      </a>
-
-      <a href="/login" class="login-btn">
-        Log In
-      </a>
-
-    </div>
-
-
-    <!-- Show when logged in -->
-    <div
-            th:if="${loggedInUser != null}"
-            class="logged-in-area">
-
-      <span class="user-welcome">
-        Welcome,
-        <span th:text="${loggedInUser.fullname}">
-          User
-        </span>
-      </span>
-
-      <a href="/logout" class="login-btn">
-        Logout
-      </a>
-
-    </div>
+    <a href="/login" class="login-btn">
+      Login
+    </a>
 
   </div>
 
 </header>
-
 
 <section class="gallery">
 
@@ -82,61 +82,32 @@
 
   <div class="gallery-images">
 
-    <img
-            src="assets/interior.webp"
-            alt="Gym Interior"
-    />
+    <div
+            th:each="image : ${galleryImages}"
+            class="gallery-item">
 
-    <img
-            src="assets/workoutarea.jpg"
-            alt="Workout Area"
-    />
+      <img
+              th:src="@{'/gallery/image/' + ${image.id}}"
+              th:alt="${image.title}">
 
-    <img
-            src="assets/group.jpg"
-            alt="Group Class"
-    />
+      <h3 th:text="${image.title}">
+        Image Title
+      </h3>
 
-    <img
-            src="assets/trainerhelping.jpg"
-            alt="Trainer Helping Client"
-    />
-
-    <img
-            src="assets/equipments.jpg"
-            alt="Equipment"
-    />
-
-    <img
-            src="assets/outdoor.jpg"
-            alt="Outdoor Workout"
-    />
+    </div>
 
   </div>
 
 </section>
 
-
 <footer class="footer">
 
   <p>
-    &copy; 2025 FitCore Gym
+    © 2026 FitCore. All rights reserved.
   </p>
 
 </footer>
 
-
-<script>
-
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-
-  navToggle.addEventListener('click', () => {
-    navLinks.classList.toggle('nav-active');
-  });
-
-</script>
-
 </body>
+
 </html>
-```

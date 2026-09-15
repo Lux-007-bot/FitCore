@@ -38,17 +38,7 @@ public class HomeController {
         return "about";
     }
 
-    @GetMapping("/blog")
-    public String blog() {
-        return "blog";
-    }
 
-
-
-    @GetMapping("/gallery")
-    public String gallery() {
-        return "gallery";
-    }
 
     @GetMapping("/location")
     public String location() {

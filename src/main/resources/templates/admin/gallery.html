@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gallery Management - FitCore</title>
+
+    <link rel="stylesheet" href="/css/adminGallery.css"></head>
+
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+
+        <div class="logo">FitCore</div>
+
+        <nav>
+            <a href="/admin/dashboard">Dashboard</a>
+            <a href="/admin/users">Users</a>
+            <a href="/admin/membership-management">Memberships</a>
+            <a href="/admin/trainers">Trainers</a>
+            <a href="/admin/gallery" class="active">Gallery</a>
+            <a href="/admin/contact-messages">Messages</a>
+            <a href="/admin/logout">Log Out</a>
+        </nav>
+
+    </aside>
+
+    <main class="admin-content">
+
+        <h1>Gallery Management</h1>
+
+        <section class="admin-card">
+
+            <h2>Upload Gallery Image</h2>
+
+            <form
+                    action="/admin/gallery/upload"
+                    method="post"
+                    enctype="multipart/form-data">
+
+                <div class="form-group">
+
+                    <label for="title">Image Title</label>
+
+                    <input
+                            type="text"
+                            id="title"
+                            name="title"
+                            required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="image">Image</label>
+
+                    <input
+                            type="file"
+                            id="image"
+                            name="image"
+                            accept="image/*"
+                            required>
+
+                </div>
+
+                <button type="submit">
+                    Upload Image
+                </button>
+
+            </form>
+
+        </section>
+
+        <section class="admin-card">
+
+            <h2>Gallery Images</h2>
+
+            <div class="gallery-grid">
+
+                <div
+                        class="gallery-item"
+                        th:each="image : ${galleryImages}">
+
+                    <img
+                            th:src="@{'/gallery/image/' + ${image.id}}"
+                            th:alt="${image.title}">
+
+                    <h3 th:text="${image.title}">
+                        Image Title
+                    </h3>
+
+                    <form
+                            th:action="@{'/admin/gallery/' + ${image.id} + '/delete'}"
+                            method="post"
+                            onsubmit="return confirm('Are you sure you want to delete this image?');">
+
+                        <button type="submit">
+                            Delete
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

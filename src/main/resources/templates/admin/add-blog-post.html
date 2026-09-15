@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Blog Post - FitCore</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: white;
+        }
+
+        .navbar {
+            background: #222;
+            padding: 20px 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #f6c66e;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #f6c66e;
+            border: 2px solid #f6c66e;
+            padding: 9px 18px;
+            border-radius: 5px;
+        }
+
+        .back-btn:hover {
+            background: #f6c66e;
+            color: #000;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 35px;
+            background: #1d1d1d;
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f6c66e;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #444;
+            border-radius: 5px;
+            background: #222;
+            color: white;
+            font-size: 15px;
+        }
+
+        input[type="file"] {
+            cursor: pointer;
+        }
+
+        textarea {
+            min-height: 220px;
+            resize: vertical;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #f6c66e;
+        }
+
+        .hint {
+            color: #999;
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: transparent;
+            border: 2px solid #f6c66e;
+            color: #f6c66e;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background: #f6c66e;
+            color: #000;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo">
+        FitCore
+    </div>
+
+    <a href="/admin/blog" class="back-btn">
+        Back
+    </a>
+
+</header>
+
+
+<div class="container">
+
+    <h1>Add Blog Post</h1>
+
+    <form
+            action="/admin/blog/new"
+            method="post"
+            enctype="multipart/form-data"
+            th:object="${post}">
+
+        <div class="form-group">
+
+            <label for="title">
+                Post Title
+            </label>
+
+            <input
+                    type="text"
+                    id="title"
+                    th:field="*{title}"
+                    placeholder="Enter blog post title"
+                    required>
+
+        </div>
+
+
+        <!-- BLOG POST IMAGE UPLOAD -->
+
+        <div class="form-group">
+
+            <label for="imageFile">
+                Cover Image
+            </label>
+
+            <input
+                    type="file"
+                    id="imageFile"
+                    name="imageFile"
+                    accept="image/*">
+
+            <div class="hint">
+                Select an image for this post from your computer.
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="content">
+                Post Content
+            </label>
+
+            <textarea
+                    id="content"
+                    th:field="*{content}"
+                    placeholder="Write the blog post content here..."
+                    required></textarea>
+
+        </div>
+
+
+        <button
+                type="submit"
+                class="submit-btn">
+
+            Publish Post
+
+        </button>
+
+    </form>
+
+</div>
+
+</body>
+</html>

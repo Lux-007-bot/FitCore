@@ -649,5 +649,103 @@
 </div>
 
 </body>
+<script>
+    const searchInput = document.querySelector('input[name="keyword"]');
+    const usersTableBody = document.querySelector('#usersTable tbody');
 
+    searchInput.addEventListener('input', async function () {
+
+        const keyword = this.value.trim();
+
+        try {
+            const response = await fetch(
+                `/admin/users/search?keyword=${encodeURIComponent(keyword)}`
+            );
+
+            if (!response.ok) {
+                return;
+            }
+
+            const data = await response.json();
+
+            usersTableBody.innerHTML = '';
+
+            if (data.content.length === 0) {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td colspan="5" class="empty-message">
+                        No registered users found.
+                    </td>
+                `;
+
+                usersTableBody.appendChild(row);
+                return;
+            }
+
+            data.content.forEach(user => {
+
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td class="user-id">
+                        ${user.id}
+                    </td>
+
+                    <td class="user-name">
+                        ${user.fullname}
+                    </td>
+
+                    <td class="user-email">
+                        ${user.email}
+                    </td>
+
+                    <td>
+                        <span class="status-badge ${user.active ? '' : 'inactive'}">
+                            ${user.active ? 'Active' : 'Inactive'}
+                        </span>
+                    </td>
+
+                    <td>
+                        <div class="action-buttons">
+
+                            <a
+                                href="/admin/users/${user.id}"
+                                class="action-button view-button">
+                                View
+                            </a>
+
+                            <a
+                                href="/admin/users/${user.id}/edit"
+                                class="action-button edit-button">
+                                Edit
+                            </a>
+
+                            <form
+                                action="/admin/users/${user.id}/delete"
+                                method="post"
+                                onsubmit="return confirm('Are you sure you want to delete this user?');"
+                                style="display: inline;">
+
+                                <button
+                                    type="submit"
+                                    class="action-button delete-button">
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+                    </td>
+                `;
+
+                usersTableBody.appendChild(row);
+            });
+
+        } catch (error) {
+            console.error('User search failed:', error);
+        }
+    });
+</script>
 </html>

@@ -14,32 +14,45 @@ public class ContactMessageService {
 
     private final ContactMessageRepository contactMessageRepository;
 
-    public ContactMessageService(ContactMessageRepository contactMessageRepository) {
-        this.contactMessageRepository = contactMessageRepository;
+    public ContactMessageService(
+            ContactMessageRepository contactMessageRepository) {
+
+        this.contactMessageRepository =
+                contactMessageRepository;
     }
 
-    public ContactMessage saveMessage(ContactMessage contactMessage) {
+    public ContactMessage saveMessage(
+            ContactMessage contactMessage) {
 
         if (contactMessage.getCreatedAt() == null) {
-            contactMessage.setCreatedAt(LocalDateTime.now());
+            contactMessage.setCreatedAt(
+                    LocalDateTime.now()
+            );
         }
 
         if (contactMessage.getStatus() == null) {
             contactMessage.setStatus("UNREAD");
         }
 
-        return contactMessageRepository.save(contactMessage);
+        return contactMessageRepository.save(
+                contactMessage
+        );
     }
 
     public List<ContactMessage> getAllMessages() {
-        return contactMessageRepository.findAllByOrderByCreatedAtDesc();
+        return contactMessageRepository
+                .findAllByOrderByCreatedAtDesc();
     }
 
-    public Optional<ContactMessage> getMessageById(Integer id) {
+    public Optional<ContactMessage> getMessageById(
+            Integer id) {
+
         return contactMessageRepository.findById(id);
     }
 
-    public List<ContactMessage> getMessagesByUser(User user) {
+    public List<ContactMessage> getMessagesByUser(
+            User user) {
+
         return contactMessageRepository.findByUser(user);
     }
 
@@ -51,13 +64,19 @@ public class ContactMessageService {
                 contactMessageRepository.findById(id)
                         .orElseThrow(() ->
                                 new IllegalArgumentException(
-                                        "Contact message not found"));
+                                        "Contact message not found"
+                                )
+                        );
 
         contactMessage.setReply(reply);
         contactMessage.setStatus("REPLIED");
-        contactMessage.setRepliedAt(LocalDateTime.now());
+        contactMessage.setRepliedAt(
+                LocalDateTime.now()
+        );
 
-        return contactMessageRepository.save(contactMessage);
+        return contactMessageRepository.save(
+                contactMessage
+        );
     }
 
     public void deleteMessage(Integer id) {

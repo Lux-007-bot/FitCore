@@ -408,6 +408,36 @@ public class UserController {
         return "admin/users";
     }
 
+    @GetMapping("/admin/users/search")
+    @ResponseBody
+    public Page<User> searchUsersAjax(
+            @RequestParam(defaultValue = "") String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            HttpSession session) {
+
+        Admin admin =
+                (Admin) session.getAttribute("loggedInAdmin");
+
+        if (admin == null) {
+            throw new RuntimeException("Unauthorized");
+        }
+
+        int pageSize = 10;
+
+        keyword = keyword.trim();
+
+        if (keyword.isEmpty()) {
+            return userService.getUsersPaginated(
+                    PageRequest.of(page, pageSize)
+            );
+        }
+
+        return userService.searchUsers(
+                keyword,
+                PageRequest.of(page, pageSize)
+        );
+    }
+
     @GetMapping("/admin/users/{id}")
     public String viewUser(
             @PathVariable Integer id,

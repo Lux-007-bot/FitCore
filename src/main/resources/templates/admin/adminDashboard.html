@@ -15,13 +15,54 @@
       text-decoration: none;
       color: inherit;
     }
+
+    .analytics-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .chart-card {
+      background: #1a1a1a;
+      border: 1px solid #2d2d2d;
+      border-radius: 13px;
+      padding: 22px;
+      transition: 0.2s ease;
+    }
+
+    .chart-card:hover {
+      border-color: #444;
+    }
+
+    .chart-card h3 {
+      margin: 0 0 18px;
+      font-size: 15px;
+      color: #f6c66e;
+      font-weight: 600;
+    }
+
+    .chart-card canvas {
+      max-height: 260px;
+    }
+
+    .chart-card-wide {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .analytics-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-card-wide {
+        grid-column: span 1;
+      }
+    }
   </style>
 
 </head>
 
 <body>
-
-<!-- ================= SIDEBAR ================= -->
 
 <aside class="sidebar">
 
@@ -33,7 +74,6 @@
       <span>Admin Panel</span>
     </div>
   </div>
-
 
   <nav class="sidebar-nav">
 
@@ -57,15 +97,27 @@
       <span>Trainers</span>
     </a>
 
+    <a href="/admin/blog" class="nav-item">
+      <span class="nav-icon">📰</span>
+      <span>Blog Posts</span>
+    </a>
+
+    <a href="/admin/gallery" class="nav-item">
+      <span class="nav-icon">▧</span>
+      <span>Gallery</span>
+    </a>
+
     <a href="/admin/contact-messages" class="nav-item">
       <span class="nav-icon">✉</span>
       <span>Messages</span>
+
       <span
               th:if="${unreadContactMessages > 0}"
               th:text="${unreadContactMessages}"
               style="margin-left: 8px; background-color: #f6c66e; color: #111; border-radius: 10px; padding: 2px 8px; font-size: 12px; font-weight: 700;">
         0
       </span>
+
     </a>
 
     <a href="#" class="nav-item">
@@ -74,7 +126,6 @@
     </a>
 
   </nav>
-
 
   <div class="sidebar-bottom">
 
@@ -93,19 +144,13 @@
 </aside>
 
 
-<!-- ================= MAIN CONTENT ================= -->
-
 <div class="main-content">
-
-
-  <!-- Top bar -->
 
   <header class="topbar">
 
     <button class="mobile-menu" id="mobileMenu">
       ☰
     </button>
-
 
     <div class="page-title">
 
@@ -117,13 +162,11 @@
 
     </div>
 
-
     <div class="admin-profile">
 
       <div class="profile-avatar">
         A
       </div>
-
 
       <div class="profile-info">
 
@@ -140,12 +183,7 @@
   </header>
 
 
-  <!-- ================= DASHBOARD ================= -->
-
   <main class="dashboard">
-
-
-    <!-- Welcome -->
 
     <section class="welcome-card">
 
@@ -173,15 +211,12 @@
 
       </div>
 
-
       <div class="welcome-decoration">
         FITCORE
       </div>
 
     </section>
 
-
-    <!-- ================= STATISTICS ================= -->
 
     <section class="section">
 
@@ -201,9 +236,6 @@
 
 
       <div class="stats-grid">
-
-
-        <!-- Total Users -->
 
         <div class="stat-card">
 
@@ -226,8 +258,6 @@
         </div>
 
 
-        <!-- Active Members -->
-
         <div class="stat-card">
 
           <div class="stat-icon membership-icon">
@@ -249,8 +279,6 @@
         </div>
 
 
-        <!-- Membership Plans -->
-
         <div class="stat-card">
 
           <div class="stat-icon trainer-icon">
@@ -271,8 +299,6 @@
 
         </div>
 
-
-        <!-- Admins -->
 
         <div class="stat-card">
 
@@ -299,7 +325,44 @@
     </section>
 
 
-    <!-- ================= MANAGEMENT ================= -->
+    <section class="section">
+
+      <div class="section-heading">
+
+        <div>
+          <h2>Analytics</h2>
+          <p>Real trends from your FitCore data</p>
+        </div>
+
+      </div>
+
+
+      <div class="analytics-grid">
+
+        <div class="chart-card">
+          <h3>Active vs Inactive Users</h3>
+          <canvas id="userStatusChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+          <h3>Messages: Unread vs Replied</h3>
+          <canvas id="messageStatusChart"></canvas>
+        </div>
+
+        <div class="chart-card chart-card-wide">
+          <h3>Memberships by Plan</h3>
+          <canvas id="planChart"></canvas>
+        </div>
+
+        <div class="chart-card chart-card-wide">
+          <h3>New Memberships — Last 6 Months</h3>
+          <canvas id="trendChart"></canvas>
+        </div>
+
+      </div>
+
+    </section>
+
 
     <section class="section">
 
@@ -323,14 +386,11 @@
       <div class="management-grid">
 
 
-        <!-- ================= USERS ================= -->
-
         <a href="/admin/users" class="management-card">
 
           <div class="management-icon">
             ♙
           </div>
-
 
           <div class="management-content">
 
@@ -351,15 +411,12 @@
         </a>
 
 
-        <!-- ================= MEMBERSHIPS ================= -->
-
         <a href="/admin/membership-management"
            class="management-card">
 
           <div class="management-icon">
             ▣
           </div>
-
 
           <div class="management-content">
 
@@ -380,15 +437,12 @@
         </a>
 
 
-        <!-- ================= TRAINERS ================= -->
-
         <a href="/admin/trainers"
            class="management-card">
 
           <div class="management-icon">
             ♟
           </div>
-
 
           <div class="management-content">
 
@@ -409,7 +463,57 @@
         </a>
 
 
-        <!-- ================= CONTACT MESSAGES ================= -->
+        <a href="/admin/blog"
+           class="management-card">
+
+          <div class="management-icon">
+            📰
+          </div>
+
+          <div class="management-content">
+
+            <h3>
+              Blog Posts
+            </h3>
+
+            <p>
+              Write, edit and manage FitCore blog articles.
+            </p>
+
+            <span class="coming-soon">
+              Manage Blog →
+            </span>
+
+          </div>
+
+        </a>
+
+
+        <a href="/admin/gallery"
+           class="management-card">
+
+          <div class="management-icon">
+            ▧
+          </div>
+
+          <div class="management-content">
+
+            <h3>
+              Gallery
+            </h3>
+
+            <p>
+              Upload and manage FitCore gallery images.
+            </p>
+
+            <span class="coming-soon">
+              Manage Gallery →
+            </span>
+
+          </div>
+
+        </a>
+
 
         <a href="/admin/contact-messages"
            class="management-card">
@@ -417,7 +521,6 @@
           <div class="management-icon">
             ✉
           </div>
-
 
           <div class="management-content">
 
@@ -438,14 +541,11 @@
         </a>
 
 
-        <!-- ================= CLASSES ================= -->
-
         <div class="management-card">
 
           <div class="management-icon">
             ◷
           </div>
-
 
           <div class="management-content">
 
@@ -470,14 +570,11 @@
     </section>
 
 
-    <!-- ================= SYSTEM STATUS ================= -->
-
     <section class="system-card">
 
       <div class="system-status">
 
         <span class="status-dot"></span>
-
 
         <div>
 
@@ -493,7 +590,6 @@
 
       </div>
 
-
       <span class="system-version">
         Spring Boot
       </span>
@@ -503,8 +599,6 @@
 
   </main>
 
-
-  <!-- ================= FOOTER ================= -->
 
   <footer class="footer">
 
@@ -517,8 +611,6 @@
 </div>
 
 
-<!-- ================= MOBILE MENU ================= -->
-
 <script>
 
   const mobileMenu =
@@ -526,7 +618,6 @@
 
   const sidebar =
           document.querySelector(".sidebar");
-
 
   mobileMenu.addEventListener("click", () => {
 
@@ -536,6 +627,116 @@
 
 </script>
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+
+<script th:inline="javascript">
+
+  const goldColor = "#f6c66e";
+  const chartTextColor = "#ccc";
+  const gridColor = "#2d2d2d";
+
+  const commonOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        labels: { color: chartTextColor }
+      }
+    },
+    scales: {
+      x: {
+        ticks: { color: chartTextColor },
+        grid: { color: gridColor }
+      },
+      y: {
+        ticks: { color: chartTextColor },
+        grid: { color: gridColor },
+        beginAtZero: true
+      }
+    }
+  };
+
+  new Chart(
+          document.getElementById("userStatusChart"),
+          {
+            type: "doughnut",
+            data: {
+              labels: /*[[${userStatusLabels}]]*/ [],
+              datasets: [{
+                data: /*[[${userStatusValues}]]*/ [],
+                backgroundColor: ["#f6c66e", "#493c18"]
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { labels: { color: chartTextColor } }
+              }
+            }
+          }
+  );
+
+  new Chart(
+          document.getElementById("messageStatusChart"),
+          {
+            type: "doughnut",
+            data: {
+              labels: /*[[${messageStatusLabels}]]*/ [],
+              datasets: [{
+                data: /*[[${messageStatusValues}]]*/ [],
+                backgroundColor: ["#f6c66e", "#5ee88a"]
+              }]
+            },
+            options: {
+              responsive: true,
+              maintainAspectRatio: false,
+              plugins: {
+                legend: { labels: { color: chartTextColor } }
+              }
+            }
+          }
+  );
+
+  new Chart(
+          document.getElementById("planChart"),
+          {
+            type: "bar",
+            data: {
+              labels: /*[[${planLabels}]]*/ [],
+              datasets: [{
+                label: "Memberships",
+                data: /*[[${planValues}]]*/ [],
+                backgroundColor: goldColor,
+                borderRadius: 6
+              }]
+            },
+            options: commonOptions
+          }
+  );
+
+  new Chart(
+          document.getElementById("trendChart"),
+          {
+            type: "line",
+            data: {
+              labels: /*[[${trendLabels}]]*/ [],
+              datasets: [{
+                label: "New Memberships",
+                data: /*[[${trendValues}]]*/ [],
+                borderColor: goldColor,
+                backgroundColor: "rgba(246, 198, 110, 0.15)",
+                fill: true,
+                tension: 0.35,
+                pointBackgroundColor: goldColor
+              }]
+            },
+            options: commonOptions
+          }
+  );
+
+</script>
 
 </body>
 
